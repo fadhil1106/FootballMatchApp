@@ -5,4 +5,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="score_default" />
+    <string name="vs">VS</string>
+    <string name="schedule_default">Schedule</string>
+    <string name="home_team_default">Home Team</string>
+    <string name="away_team_default">Away Team</string>
 </resources>

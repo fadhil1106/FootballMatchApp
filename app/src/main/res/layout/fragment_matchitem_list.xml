@@ -15,7 +15,7 @@
         android:id="@+id/matchSchedule"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/schedule_default"
         android:textAlignment="center"
         android:textColor="?attr/colorAccent" />
 
@@ -34,14 +34,14 @@
                 android:id="@+id/homeTeam"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="@string/home_team_default"
                 android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/homeScore"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="0"
+                android:text="@string/score_default"
                 android:textAlignment="center"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -53,7 +53,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical|center_horizontal"
-            android:text="VS"
+            android:text="@string/vs"
             android:textColor="?attr/colorPrimary"
             android:textSize="20sp"
             android:textStyle="bold|italic" />
@@ -68,14 +68,14 @@
                 android:id="@+id/awayTeam"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="@string/away_team_default"
                 android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/awayScore"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="0"
+                android:text="@string/score_default"
                 android:textAlignment="center"
                 android:textSize="18sp"
                 android:textStyle="bold" />

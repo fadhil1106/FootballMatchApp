@@ -1,7 +1,9 @@
 package com.panritech.fuad.footballmatchapp
 
-import com.panritech.fuad.footballmatchapp.model.MatchItems
+import com.panritech.fuad.footballmatchapp.model.MatchItem
 
 interface MatchView {
-    fun showTeamList(data: List<MatchItems>)
+    fun showProgressBar()
+    fun hideProgressBar()
+    fun showMatchList(data: List<MatchItem>)
 }

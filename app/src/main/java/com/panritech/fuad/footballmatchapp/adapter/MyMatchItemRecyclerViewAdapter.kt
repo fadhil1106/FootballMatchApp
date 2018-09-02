@@ -10,6 +10,7 @@ import android.widget.TextView
 import com.panritech.fuad.footballmatchapp.fragment.MatchItemFragment.OnListFragmentInteractionListener
 import com.panritech.fuad.footballmatchapp.R
 import com.panritech.fuad.footballmatchapp.dummy.DummyContent.DummyItem
+import com.panritech.fuad.footballmatchapp.model.MatchItem
 import org.jetbrains.anko.find
 
 /**
@@ -18,7 +19,7 @@ import org.jetbrains.anko.find
  * TODO: Replace the implementation with code for your data type.
  */
 class MyMatchItemRecyclerViewAdapter(
-        private val items: List<DummyItem>,
+        private val items: MutableList<MatchItem>,
         private val mListener: OnListFragmentInteractionListener?)
     : RecyclerView.Adapter<MyMatchItemRecyclerViewAdapter.ViewHolder>() {
 
@@ -52,12 +53,12 @@ class MyMatchItemRecyclerViewAdapter(
         val awayTeam: TextView = view.find(R.id.awayTeam)
         val awayScore: TextView = view.find(R.id.awayScore)
 
-        fun bindItem(items: DummyItem){
-            //matchSchedule.text = items.matchSchedule
-            homeTeam.text = items.id
-            //homeScore.text = items.homeScore
-            awayTeam.text = items.content
-            //awayScore.text = items.awayScore
+        fun bindItem(items: MatchItem){
+            matchSchedule.text = items.matchSchedule
+            homeTeam.text = items.homeTeam
+            homeScore.text = items.homeScore
+            awayTeam.text = items.awayTeam
+            awayScore.text = items.awayScore
         }
     }
 }
