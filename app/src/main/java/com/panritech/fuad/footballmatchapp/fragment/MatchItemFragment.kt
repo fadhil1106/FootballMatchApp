@@ -14,10 +14,7 @@ import com.panritech.fuad.footballmatchapp.MatchView
 import com.panritech.fuad.footballmatchapp.adapter.MyMatchItemRecyclerViewAdapter
 import com.panritech.fuad.footballmatchapp.R
 import com.panritech.fuad.footballmatchapp.api.ApiRepository
-
-import com.panritech.fuad.footballmatchapp.dummy.DummyContent.DummyItem
 import com.panritech.fuad.footballmatchapp.model.MatchItem
-import kotlinx.android.synthetic.main.fragment_matchitem.*
 
 /**
  * A fragment representing a list of Items.
@@ -27,6 +24,7 @@ import kotlinx.android.synthetic.main.fragment_matchitem.*
 class MatchItemFragment : Fragment(),MatchView {
 
     private var match: MutableList<MatchItem> = mutableListOf()
+    private var listener: OnListFragmentInteractionListener? = null
     private lateinit var adapter: MyMatchItemRecyclerViewAdapter
     private lateinit var presenter: MatchPresenter
 
@@ -37,24 +35,14 @@ class MatchItemFragment : Fragment(),MatchView {
     override fun hideProgressBar() {
 
     }
-
     override fun showMatchList(data: List<MatchItem>){
+        TODO("SwipeRefresh Still Error Null")
 //        swipeRefresh.isRefreshing = false
         match.clear()
         match.addAll(data)
         adapter.notifyDataSetChanged()
     }
-    // TODO: Customize parameters
-    //private var teams: MutableList<>
-    private var listener: OnListFragmentInteractionListener? = null
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//
-////        arguments?.let {
-////            columnCount = it.getInt(ARG_COLUMN_COUNT)
-////        }
-//    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -104,7 +92,7 @@ class MatchItemFragment : Fragment(),MatchView {
      */
     interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        fun onListFragmentInteraction(item: DummyItem?)
+        fun onListFragmentInteraction(item: MatchItem)
     }
 
     companion object {
