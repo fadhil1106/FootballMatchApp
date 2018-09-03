@@ -1,6 +1,7 @@
 package com.panritech.fuad.footballmatchapp.adapter
 
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,17 +23,6 @@ class MyMatchItemRecyclerViewAdapter(
         private val items: MutableList<MatchItem>,
         private val mListener: OnListFragmentInteractionListener?)
     : RecyclerView.Adapter<MyMatchItemRecyclerViewAdapter.ViewHolder>() {
-
-    private val mOnClickListener: View.OnClickListener
-
-    init {
-        mOnClickListener = View.OnClickListener { v ->
-            val item = v.tag as MatchItem
-            // Notify the active callbacks interface (the activity, if the fragment is attached to
-            // one) that an item has been selected.
-            mListener?.onListFragmentInteraction(item)
-        }
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -59,6 +49,10 @@ class MyMatchItemRecyclerViewAdapter(
             homeScore.text = items.homeScore
             awayTeam.text = items.awayTeam
             awayScore.text = items.awayScore
+
+            itemView.setOnClickListener {
+                mListener?.onListFragmentInteraction(items)
+            }
         }
     }
 }
