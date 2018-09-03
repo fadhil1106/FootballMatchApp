@@ -14,11 +14,6 @@ import com.panritech.fuad.footballmatchapp.dummy.DummyContent.DummyItem
 import com.panritech.fuad.footballmatchapp.model.MatchItem
 import org.jetbrains.anko.find
 
-/**
- * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
- * specified [OnListFragmentInteractionListener].
- * TODO: Replace the implementation with code for your data type.
- */
 class MyMatchItemRecyclerViewAdapter(
         private val items: MutableList<MatchItem>,
         private val mListener: OnListFragmentInteractionListener?)

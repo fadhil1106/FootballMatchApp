@@ -3,52 +3,70 @@ package com.panritech.fuad.footballmatchapp.fragment
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.GridLayoutManager
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.panritech.fuad.footballmatchapp.adapter.MyNextMatchItemRecyclerViewAdapter
+import android.widget.ProgressBar
+import com.google.gson.Gson
+import com.panritech.fuad.footballmatchapp.Presenter.MatchPresenter
 import com.panritech.fuad.footballmatchapp.R
+import com.panritech.fuad.footballmatchapp.View.MatchView
+import com.panritech.fuad.footballmatchapp.adapter.MyMatchItemRecyclerViewAdapter
+import com.panritech.fuad.footballmatchapp.adapter.MyNextMatchItemRecyclerViewAdapter
+import com.panritech.fuad.footballmatchapp.api.ApiRepository
 
-import com.panritech.fuad.footballmatchapp.dummy.DummyContent
-import com.panritech.fuad.footballmatchapp.dummy.DummyContent.DummyItem
+import com.panritech.fuad.footballmatchapp.model.MatchItem
+import kotlinx.android.synthetic.main.fragment_matchitem.view.*
+import org.jetbrains.anko.support.v4.onRefresh
 
-/**
- * A fragment representing a list of Items.
- * Activities containing this fragment MUST implement the
- * [NextMatchItemFragment.OnListFragmentInteractionListener] interface.
- */
-class NextMatchItemFragment : Fragment() {
+class NextMatchItemFragment : Fragment() , MatchView{
 
-    // TODO: Customize parameters
-    private var columnCount = 1
-
-    private var listener: OnListFragmentInteractionListener? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        arguments?.let {
-            columnCount = it.getInt(ARG_COLUMN_COUNT)
-        }
+    override fun showProgressBar() {
+        progressBar.visibility = View.VISIBLE
     }
+
+    override fun hideProgressBar() {
+        progressBar.visibility = View.GONE
+    }
+    override fun showMatchList(data: List<MatchItem>){
+
+        swipeRefresh.isRefreshing = false
+        match.clear()
+        match.addAll(data)
+        adapter.notifyDataSetChanged()
+        hideProgressBar()
+    }
+
+    private var match: MutableList<MatchItem> = mutableListOf()
+    private var listener: NextMatchItemFragment.OnListFragmentInteractionListener? = null
+    private lateinit var adapter: MyNextMatchItemRecyclerViewAdapter
+    private lateinit var presenter: MatchPresenter
+    private lateinit var swipeRefresh: SwipeRefreshLayout
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_nextmatchitem_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_nextmatchitem, container, false)
 
-        // Set the adapter
-        if (view is RecyclerView) {
-            with(view) {
-                layoutManager = when {
-                    columnCount <= 1 -> LinearLayoutManager(context)
-                    else -> GridLayoutManager(context, columnCount)
-                }
-                adapter = MyNextMatchItemRecyclerViewAdapter(DummyContent.ITEMS, listener)
-            }
+        val recycleView = view.findViewById<RecyclerView>(R.id.listMatch)
+        recycleView.layoutManager =  LinearLayoutManager(context)
+        adapter = MyNextMatchItemRecyclerViewAdapter(match, listener)
+        recycleView.adapter = adapter
+
+        swipeRefresh = view.swipeRefresh
+        progressBar = view.progressBar
+
+        swipeRefresh.onRefresh {
+            presenter.getNextMatchList("4328")
         }
+        showProgressBar()
+        val apiRequest = ApiRepository()
+        val gson = Gson()
+        presenter = MatchPresenter(this, apiRequest, gson)
+        presenter.getNextMatchList("4328")
         return view
     }
 
@@ -79,21 +97,13 @@ class NextMatchItemFragment : Fragment() {
      */
     interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        fun onListFragmentInteraction(item: DummyItem?)
+        fun onListFragmentInteraction(item: MatchItem)
     }
 
     companion object {
 
-        // TODO: Customize parameter argument names
-        const val ARG_COLUMN_COUNT = "column-count"
-
         // TODO: Customize parameter initialization
         @JvmStatic
-        fun newInstance() =
-                NextMatchItemFragment().apply {
-                    arguments = Bundle().apply {
-                        putInt(ARG_COLUMN_COUNT, columnCount)
-                    }
-                }
+        fun newInstance() = NextMatchItemFragment()
     }
 }

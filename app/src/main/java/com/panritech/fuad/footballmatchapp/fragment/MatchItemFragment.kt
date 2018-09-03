@@ -11,8 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import com.google.gson.Gson
-import com.panritech.fuad.footballmatchapp.MatchPresenter
-import com.panritech.fuad.footballmatchapp.MatchView
+import com.panritech.fuad.footballmatchapp.Presenter.MatchPresenter
+import com.panritech.fuad.footballmatchapp.View.MatchView
 import com.panritech.fuad.footballmatchapp.adapter.MyMatchItemRecyclerViewAdapter
 import com.panritech.fuad.footballmatchapp.R
 import com.panritech.fuad.footballmatchapp.api.ApiRepository
@@ -20,7 +20,7 @@ import com.panritech.fuad.footballmatchapp.model.MatchItem
 import kotlinx.android.synthetic.main.fragment_matchitem.view.*
 import org.jetbrains.anko.support.v4.onRefresh
 
-class MatchItemFragment : Fragment(),MatchView {
+class MatchItemFragment : Fragment(), MatchView {
 
     private var match: MutableList<MatchItem> = mutableListOf()
     private var listener: OnListFragmentInteractionListener? = null
@@ -62,13 +62,13 @@ class MatchItemFragment : Fragment(),MatchView {
         progressBar = view.progressBar
 
         swipeRefresh.onRefresh {
-            presenter.getMatchList("")
+            presenter.getMatchList("4328")
         }
         showProgressBar()
         val apiRequest = ApiRepository()
         val gson = Gson()
         presenter = MatchPresenter(this, apiRequest, gson)
-        presenter.getMatchList("")
+        presenter.getMatchList("4328")
         return view
     }
 

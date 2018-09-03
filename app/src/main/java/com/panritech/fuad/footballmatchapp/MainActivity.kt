@@ -6,7 +6,6 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import com.panritech.fuad.footballmatchapp.fragment.MatchItemFragment
 import com.panritech.fuad.footballmatchapp.fragment.NextMatchItemFragment
-import com.panritech.fuad.footballmatchapp.dummy.DummyContent
 import com.panritech.fuad.footballmatchapp.model.MatchItem
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
@@ -16,10 +15,6 @@ class MainActivity : AppCompatActivity(), MatchItemFragment.OnListFragmentIntera
     override fun onListFragmentInteraction(item: MatchItem) {
         toast(item.homeTeam.toString())
         startActivity<MatchDetail>()
-    }
-
-    override fun onListFragmentInteraction(item: DummyContent.DummyItem?) {
-       toast(item.toString())
     }
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
