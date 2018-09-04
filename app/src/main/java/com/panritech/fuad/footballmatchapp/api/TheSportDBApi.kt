@@ -1,6 +1,7 @@
 package com.panritech.fuad.footballmatchapp.api
 
 import android.net.Uri
+import android.util.Log
 import com.panritech.fuad.footballmatchapp.BuildConfig
 
 object TheSportDBApi {
@@ -28,7 +29,7 @@ object TheSportDBApi {
                 .toString()
     }
 
-    fun getMatchDetail(events: String? = ""): String{
+    fun getMatchDetail(events: String? =""): String{
         return Uri.parse(BuildConfig.BASE_URL).buildUpon()
                 .appendPath("api")
                 .appendPath("v1")

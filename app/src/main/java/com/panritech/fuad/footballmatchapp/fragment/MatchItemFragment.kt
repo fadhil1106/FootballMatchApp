@@ -11,8 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import com.google.gson.Gson
-import com.panritech.fuad.footballmatchapp.Presenter.MatchPresenter
-import com.panritech.fuad.footballmatchapp.View.MatchView
+import com.panritech.fuad.footballmatchapp.presenter.MatchPresenter
+import com.panritech.fuad.footballmatchapp.view.MatchView
 import com.panritech.fuad.footballmatchapp.adapter.MyMatchItemRecyclerViewAdapter
 import com.panritech.fuad.footballmatchapp.R
 import com.panritech.fuad.footballmatchapp.api.ApiRepository

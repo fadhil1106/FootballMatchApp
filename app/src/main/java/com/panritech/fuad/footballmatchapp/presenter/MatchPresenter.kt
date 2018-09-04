@@ -1,7 +1,7 @@
-package com.panritech.fuad.footballmatchapp.Presenter
+package com.panritech.fuad.footballmatchapp.presenter
 
 import com.google.gson.Gson
-import com.panritech.fuad.footballmatchapp.View.MatchView
+import com.panritech.fuad.footballmatchapp.view.MatchView
 import com.panritech.fuad.footballmatchapp.api.ApiRepository
 import com.panritech.fuad.footballmatchapp.api.TheSportDBApi
 import com.panritech.fuad.footballmatchapp.model.MatchItemResponse
@@ -10,7 +10,8 @@ import org.jetbrains.anko.uiThread
 
 class MatchPresenter(private val matchView: MatchView,
                      private val apiRepository: ApiRepository,
-                     private val gson: Gson) {
+                     private val gson: Gson)
+{
     fun getMatchList(league: String?){
         doAsync {
             val data = gson.fromJson(apiRepository

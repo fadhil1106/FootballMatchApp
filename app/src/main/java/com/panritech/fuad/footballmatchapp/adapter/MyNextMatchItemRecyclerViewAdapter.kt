@@ -32,9 +32,9 @@ class MyNextMatchItemRecyclerViewAdapter(
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val matchSchedule: TextView = view.find(R.id.matchSchedule)
         val homeTeam: TextView = view.find(R.id.homeTeam)
-        val homeScore: TextView = view.find(R.id.homeScore)
+        val homeScore: TextView = view.find(R.id.homeTeamScore)
         val awayTeam: TextView = view.find(R.id.awayTeam)
-        val awayScore: TextView = view.find(R.id.awayScore)
+        val awayScore: TextView = view.find(R.id.awayTeamScore)
 
         fun bindItem(items: MatchItem){
             matchSchedule.text = items.matchSchedule

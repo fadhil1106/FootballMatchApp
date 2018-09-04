@@ -13,8 +13,12 @@ import org.jetbrains.anko.toast
 
 class MainActivity : AppCompatActivity(), MatchItemFragment.OnListFragmentInteractionListener, NextMatchItemFragment.OnListFragmentInteractionListener {
     override fun onListFragmentInteraction(item: MatchItem) {
-        toast(item.homeTeam.toString())
-        startActivity<MatchDetail>()
+        startActivity<MatchDetailActivity>("idEvent" to item.idEvent
+                                    , "homeTeam" to item.homeTeam
+                                    , "homeScore" to item.homeScore
+                                    , "awayTeam" to item.awayTeam
+                                    , "awayScore" to item.awayScore
+                                    , "schedule" to item.matchSchedule)
     }
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->

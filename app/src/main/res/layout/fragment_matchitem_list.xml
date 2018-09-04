@@ -38,7 +38,7 @@
                 android:textAlignment="center" />
 
             <TextView
-                android:id="@+id/homeScore"
+                android:id="@+id/homeTeamScore"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/score_default"
@@ -72,7 +72,7 @@
                 android:textAlignment="center" />
 
             <TextView
-                android:id="@+id/awayScore"
+                android:id="@+id/awayTeamScore"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/score_default"

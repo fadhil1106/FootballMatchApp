@@ -1,4 +1,4 @@
-package com.panritech.fuad.footballmatchapp.View
+package com.panritech.fuad.footballmatchapp.view
 
 import com.panritech.fuad.footballmatchapp.model.MatchItem
 
