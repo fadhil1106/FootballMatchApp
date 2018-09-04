@@ -10,8 +10,8 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
         android:background="@android:color/white"
+        android:elevation="1dp"
         android:padding="5dp">
 
         <ProgressBar
@@ -59,14 +59,13 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:textAlignment="center"
-            android:textSize="18sp"
+            android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/textView2"
-            app:layout_constraintHorizontal_bias="0.914"
+            app:layout_constraintHorizontal_bias="0.9"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/eventSchedule"
-            app:layout_constraintVertical_bias="0.3" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/homeBadge"
@@ -99,14 +98,13 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:textAlignment="center"
-            android:textSize="18sp"
+            android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.1"
             app:layout_constraintStart_toEndOf="@+id/textView2"
-            app:layout_constraintTop_toBottomOf="@+id/eventSchedule"
-            app:layout_constraintVertical_bias="0.3" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/awayBadge"
@@ -137,7 +135,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:text="@string/vs"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -150,9 +148,7 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="match_parent"
         android:layout_height="25dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -161,8 +157,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="3dp">
+        android:layout_height="match_parent">
 
         <TableLayout
             android:layout_width="match_parent"

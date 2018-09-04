@@ -62,7 +62,6 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         presenter.getBadgeUrl(homeTeam,"home")
         presenter.getBadgeUrl(awayTeam,"away")
 
-        Log.e("Call: ","Call Presenter")
     }
 
     override fun showMatchDetail(data: List<MatchDetailItem>) {
@@ -125,7 +124,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         return if (value!= "null")
             getString(R.string.detail_text, text, value)
         else
-            getString(R.string.detail_text,"","")
+            getString(R.string.detail_text,"","No Data")
     }
 
     private fun setDetailText(list: List<String>, txtView: TextView) {

@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/navigation_match"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/soccer_icon"
         android:title="@string/title_match" />
     <item
         android:id="@+id/navigation_next_match"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/schedule_icon"
         android:title="@string/title_next_match" />
 
 </menu>
