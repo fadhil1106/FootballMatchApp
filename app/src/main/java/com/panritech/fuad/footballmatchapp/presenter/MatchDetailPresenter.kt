@@ -6,6 +6,7 @@ import com.panritech.fuad.footballmatchapp.view.MatchDetailView
 import com.panritech.fuad.footballmatchapp.api.ApiRepository
 import com.panritech.fuad.footballmatchapp.api.TheSportDBApi
 import com.panritech.fuad.footballmatchapp.model.MatchDetailItemResponse
+import com.panritech.fuad.footballmatchapp.model.TeamBadgeResponse
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
@@ -14,16 +15,28 @@ class MatchDetailPresenter(private val matchDetailView: MatchDetailView,
                            private val gson: Gson)
 {
     fun getMatchDetail(events: String?){
-        Log.e("Presenter: ","Called")
-
         doAsync {
-            Log.e("GetData: ","Getting Data")
             val data = gson.fromJson(apiRepository
                     .doRequest(TheSportDBApi.getMatchDetail(events))
                     , MatchDetailItemResponse::class.java)
-            Log.e("GetData: ",data.toString())
             uiThread {
                 matchDetailView.showMatchDetail(data.events)
+            }
+        }
+    }
+
+    fun getBadgeUrl(teamName: String?, teamStatus: String?){
+        doAsync {
+            val data = gson.fromJson(apiRepository
+                    .doRequest(TheSportDBApi.getBadgeUrl(teamName))
+                    , TeamBadgeResponse::class.java)
+            Log.e("Presenter", data.toString())
+
+            uiThread {
+                if(teamStatus == "home")
+                    matchDetailView.showHomeBadge(data.teams)
+                else
+                    matchDetailView.showAwayBadge(data.teams)
             }
         }
     }

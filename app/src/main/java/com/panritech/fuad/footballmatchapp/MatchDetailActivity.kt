@@ -11,12 +11,25 @@ import com.panritech.fuad.footballmatchapp.presenter.MatchDetailPresenter
 import com.panritech.fuad.footballmatchapp.view.MatchDetailView
 import com.panritech.fuad.footballmatchapp.api.ApiRepository
 import com.panritech.fuad.footballmatchapp.model.MatchDetailItem
+import com.panritech.fuad.footballmatchapp.model.TeamBadge
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_match_detail.*
 
 class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
+    override fun showHomeBadge(data: List<TeamBadge>) {
+        Picasso.get().load(data[0].teamBadge).into(homeBadge)
+        hideProgressBar(homeProgress)
+    }
+
+    override fun showAwayBadge(data: List<TeamBadge>) {
+        Picasso.get().load(data[0].teamBadge).into(awayBadge)
+        hideProgressBar(awayProgress)
+    }
 
     private lateinit var presenter: MatchDetailPresenter
-    private lateinit var progressBar: ProgressBar
+    private lateinit var detailProgress: ProgressBar
+    private lateinit var homeProgress: ProgressBar
+    private lateinit var awayProgress: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +42,9 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         val awayScore = intent.getStringExtra("awayScore")
         val matchSchedule = intent.getStringExtra("schedule")
 
-        progressBar = detailProgressBar
+        detailProgress = detailProgressBar
+        homeProgress = homeProgressBar
+        awayProgress = awayProgessBar
 
         homeTeamName.text = homeTeam
         homeTeamScore.text = homeScore
@@ -37,10 +52,16 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         awayTeamScore.text = awayScore
         eventSchedule.text = matchSchedule
 
+        showProgressBar(detailProgress)
+        showProgressBar(homeProgress)
+        showProgressBar(awayProgress)
         val apiRequest = ApiRepository()
         val gson = Gson()
         presenter = MatchDetailPresenter(this, apiRequest, gson)
         presenter.getMatchDetail(idEvent)
+        presenter.getBadgeUrl(homeTeam,"home")
+        presenter.getBadgeUrl(awayTeam,"away")
+
         Log.e("Call: ","Call Presenter")
     }
 
@@ -84,13 +105,15 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         setDetailText(awayMidfield, txtAwayMidfield)
         setDetailText(awayForward, txtAwayForward)
         setDetailText(awaySubstitutes, txtAwaySubstitutes)
+
+        hideProgressBar(detailProgress)
     }
 
-    override fun showProgressBar() {
+    override fun showProgressBar(progressBar: ProgressBar) {
         progressBar.visibility = View.VISIBLE
     }
 
-    override fun hideProgressBar() {
+    override fun hideProgressBar(progressBar: ProgressBar) {
         progressBar.visibility = View.GONE
     }
 
@@ -98,10 +121,14 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         return details.toString().split(delimiters)
     }
 
-    private fun getString(text: String, value: String): String =
-            getString(R.string.detail_text,text,value)
+    private fun getString(text: String, value: String): String {
+        return if (value!= "null")
+            getString(R.string.detail_text, text, value)
+        else
+            getString(R.string.detail_text,"","")
+    }
 
     private fun setDetailText(list: List<String>, txtView: TextView) {
-        for (value in list){txtView.text = getString(txtView.text.toString(), value)}
+        for (value in list){ txtView.text = getString(txtView.text.toString(), value) }
     }
 }

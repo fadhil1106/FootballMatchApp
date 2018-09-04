@@ -41,7 +41,7 @@ object TheSportDBApi {
                 .toString()
     }
 
-    fun getTeamImage(team: String? = ""): String{
+    fun getBadgeUrl(team: String? = ""): String{
         return Uri.parse(BuildConfig.BASE_URL).buildUpon()
                 .appendPath("api")
                 .appendPath("v1")
