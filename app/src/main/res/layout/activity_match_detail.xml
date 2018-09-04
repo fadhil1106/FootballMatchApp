@@ -5,17 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp"
     tools:context=".MatchDetailActivity">
+
+    <ProgressBar
+        android:id="@+id/detailProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/eventSchedule"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
+        android:paddingTop="5dp"
         android:text="@string/schedule_default"
         android:textAlignment="center"
-        android:textColor="?attr/colorAccent" />
+        android:textColor="?attr/colorAccent"
+        android:textStyle="italic" />
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -123,7 +131,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="3dp">
 
         <TableLayout
             android:layout_width="match_parent"
@@ -141,12 +150,15 @@
                 android:elevation="1dp">
 
                 <TextView
-                    android:id="@+id/homeFormation"
+                    android:id="@+id/txtHomeFormation"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="1.5"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
                     android:textAlignment="textStart"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
 
                 <TextView
                     android:id="@+id/txtFormation"
@@ -159,12 +171,15 @@
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/awayFormation"
+                    android:id="@+id/txtAwayFormation"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="1.5"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
                     android:textAlignment="textEnd"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
             </TableRow>
 
             <TableRow
@@ -178,11 +193,15 @@
                 android:elevation="1dp">
 
                 <TextView
-                    android:id="@+id/homeGoals"
+                    android:id="@+id/txtHomeGoals"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textAlignment="textStart" />
+                    android:layout_weight="1.5"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:textAlignment="textStart"
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
 
                 <TextView
                     android:id="@+id/txtGoals"
@@ -195,11 +214,15 @@
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/awayGoals"
+                    android:id="@+id/txtAwayGoals"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textAlignment="textEnd" />
+                    android:layout_weight="1.5"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:textAlignment="textEnd"
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
             </TableRow>
 
             <TableRow
@@ -213,11 +236,15 @@
                 android:elevation="1dp">
 
                 <TextView
-                    android:id="@+id/homeRedCard"
+                    android:id="@+id/txtHomeRedCard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textAlignment="textStart" />
+                    android:layout_weight="1.5"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:textAlignment="textStart"
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
 
                 <TextView
                     android:id="@+id/txtRedCards"
@@ -230,11 +257,15 @@
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/awayRedCard"
+                    android:id="@+id/txtAwayRedCard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textAlignment="textEnd" />
+                    android:layout_weight="1.5"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:textAlignment="textEnd"
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
             </TableRow>
 
             <TableRow
@@ -248,11 +279,15 @@
                 android:elevation="1dp">
 
                 <TextView
-                    android:id="@+id/homeYellowCard"
+                    android:id="@+id/txtHomeYellowCard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textAlignment="textStart" />
+                    android:layout_weight="1.5"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:textAlignment="textStart"
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
 
                 <TextView
                     android:id="@+id/txtYellowCards"
@@ -265,11 +300,15 @@
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/awayYellowCard"
+                    android:id="@+id/txtAwayYellowCard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textAlignment="textEnd" />
+                    android:layout_weight="1.5"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:textAlignment="textEnd"
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
             </TableRow>
 
             <TableRow
@@ -283,11 +322,15 @@
                 android:elevation="1dp">
 
                 <TextView
-                    android:id="@+id/homeGoalKeeper"
+                    android:id="@+id/txtHomeGoalKeeper"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textAlignment="textStart" />
+                    android:layout_weight="1.5"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:textAlignment="textStart"
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
 
                 <TextView
                     android:id="@+id/txtGoalKeeper"
@@ -300,11 +343,15 @@
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/awayGoalKeeper"
+                    android:id="@+id/txtAwayGoalKeeper"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textAlignment="textEnd" />
+                    android:layout_weight="1.5"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:textAlignment="textEnd"
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
             </TableRow>
 
             <TableRow
@@ -318,11 +365,15 @@
                 android:elevation="1dp">
 
                 <TextView
-                    android:id="@+id/homeDefense"
+                    android:id="@+id/txtHomeDefense"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textAlignment="textStart" />
+                    android:layout_weight="1.5"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:textAlignment="textStart"
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
 
                 <TextView
                     android:id="@+id/txtDefense"
@@ -335,15 +386,19 @@
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/awayDefense"
+                    android:id="@+id/txtAwayDefense"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textAlignment="textEnd" />
+                    android:layout_weight="1.5"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:textAlignment="textEnd"
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
             </TableRow>
 
             <TableRow
-                android:id="@+id/rowMidField"
+                android:id="@+id/rowMidfield"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="1dp"
@@ -353,14 +408,18 @@
                 android:elevation="1dp">
 
                 <TextView
-                    android:id="@+id/homeMidField"
+                    android:id="@+id/txtHomeMidfield"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textAlignment="textStart" />
+                    android:layout_weight="1.5"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:textAlignment="textStart"
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
 
                 <TextView
-                    android:id="@+id/txtMidField"
+                    android:id="@+id/txtMidfield"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -370,11 +429,15 @@
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/awayMidField"
+                    android:id="@+id/txtAwayMidfield"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textAlignment="textEnd" />
+                    android:layout_weight="1.5"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:textAlignment="textEnd"
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
             </TableRow>
 
             <TableRow
@@ -388,11 +451,15 @@
                 android:elevation="1dp">
 
                 <TextView
-                    android:id="@+id/homeForward"
+                    android:id="@+id/txtHomeForward"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textAlignment="textStart" />
+                    android:layout_weight="1.5"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:textAlignment="textStart"
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
 
                 <TextView
                     android:id="@+id/txtForward"
@@ -405,11 +472,15 @@
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/awayForward"
+                    android:id="@+id/txtAwayForward"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textAlignment="textEnd" />
+                    android:layout_weight="1.5"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:textAlignment="textEnd"
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
             </TableRow>
 
             <TableRow
@@ -423,11 +494,15 @@
                 android:elevation="1dp">
 
                 <TextView
-                    android:id="@+id/homeSubstitutes"
+                    android:id="@+id/txtHomeSubstitutes"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textAlignment="textStart" />
+                    android:layout_weight="1.5"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:textAlignment="textStart"
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
 
                 <TextView
                     android:id="@+id/txtSubstitutes"
@@ -440,11 +515,15 @@
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/awaySubstitutes"
+                    android:id="@+id/txtAwaySubstitutes"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textAlignment="textEnd" />
+                    android:layout_weight="1.5"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:textAlignment="textEnd"
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
             </TableRow>
 
         </TableLayout>
