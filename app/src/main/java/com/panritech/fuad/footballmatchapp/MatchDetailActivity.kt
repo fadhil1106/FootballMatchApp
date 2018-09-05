@@ -65,25 +65,25 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
     }
 
     override fun showMatchDetail(data: List<MatchDetailItem>) {
-        val homeFormation = data[0].homeFormation.toString()
-        val homeGoalDetail = getList(data[0].homeGoalDetails,";")
-        val homeRedCard =  getList(data[0].homeRedCard,";")
-        val homeYellowCard = getList(data[0].homeYellowCard,";")
-        val homeGoalkeeper = getList(data[0].homeGoalkeeper,";")
-        val homeDefense = getList(data[0].homeDefense,"; ")
-        val homeMidfield = getList(data[0].homeMidfield,"; ")
-        val homeForward = getList(data[0].homeForward,"; ")
-        val homeSubstitutes = getList(data[0].homeSubstitutes,"; ")
+        val homeFormation = data[0].homeFormation.toString().trim()
+        val homeGoalDetail = getList(data[0].homeGoalDetails)
+        val homeRedCard =  getList(data[0].homeRedCard)
+        val homeYellowCard = getList(data[0].homeYellowCard)
+        val homeGoalkeeper = getList(data[0].homeGoalkeeper)
+        val homeDefense = getList(data[0].homeDefense)
+        val homeMidfield = getList(data[0].homeMidfield)
+        val homeForward = getList(data[0].homeForward)
+        val homeSubstitutes = getList(data[0].homeSubstitutes)
 
-        val awayFormation = data[0].awayFormation.toString()
-        val awayGoalDetail = getList(data[0].awayGoalDetails,";")
-        val awayRedCard = getList(data[0].awayRedCard,";")
-        val awayYellowCard = getList(data[0].awayYellowCard,";")
-        val awayGoalkeeper = getList(data[0].awayGoalkeeper,";")
-        val awayDefense = getList(data[0].awayDefense,"; ")
-        val awayMidfield = getList(data[0].awayMidfield,"; ")
-        val awayForward = getList(data[0].awayForward,"; ")
-        val awaySubstitutes = getList(data[0].awaySubstitutes,"; ")
+        val awayFormation = data[0].awayFormation.toString().trim()
+        val awayGoalDetail = getList(data[0].awayGoalDetails)
+        val awayRedCard = getList(data[0].awayRedCard)
+        val awayYellowCard = getList(data[0].awayYellowCard)
+        val awayGoalkeeper = getList(data[0].awayGoalkeeper)
+        val awayDefense = getList(data[0].awayDefense)
+        val awayMidfield = getList(data[0].awayMidfield)
+        val awayForward = getList(data[0].awayForward)
+        val awaySubstitutes = getList(data[0].awaySubstitutes)
 
         txtHomeFormation.text = getString("",homeFormation)
         setDetailText(homeGoalDetail, txtHomeGoals)
@@ -116,8 +116,8 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         progressBar.visibility = View.GONE
     }
 
-    private fun getList(details: String?, delimiters: String): List<String> {
-        return details.toString().split(delimiters)
+    private fun getList(details: String?): List<String> {
+        return details.toString().split(";")
     }
 
     private fun getString(text: String, value: String): String {
@@ -128,6 +128,6 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
     }
 
     private fun setDetailText(list: List<String>, txtView: TextView) {
-        for (value in list){ txtView.text = getString(txtView.text.toString(), value) }
+        for (value in list){ txtView.text = getString(txtView.text.toString(), value.trim()) }
     }
 }
