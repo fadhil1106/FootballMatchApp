@@ -30,7 +30,6 @@ class MatchDetailPresenter(private val matchDetailView: MatchDetailView,
             val data = gson.fromJson(apiRepository
                     .doRequest(TheSportDBApi.getBadgeUrl(teamName))
                     , TeamBadgeResponse::class.java)
-            Log.e("Presenter", data.toString())
 
             uiThread {
                 if(teamStatus == "home")

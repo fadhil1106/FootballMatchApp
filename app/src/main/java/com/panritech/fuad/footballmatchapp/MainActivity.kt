@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import com.panritech.fuad.footballmatchapp.fragment.FavoritesFragment
 import com.panritech.fuad.footballmatchapp.fragment.MatchItemFragment
 import com.panritech.fuad.footballmatchapp.fragment.NextMatchItemFragment
+import com.panritech.fuad.footballmatchapp.model.Favorite
 import com.panritech.fuad.footballmatchapp.model.MatchItem
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
@@ -14,15 +16,16 @@ import org.jetbrains.anko.startActivity
 class MainActivity : AppCompatActivity(), MatchItemFragment.OnListFragmentInteractionListener
                     , NextMatchItemFragment.OnListFragmentInteractionListener
                     , FavoritesFragment.OnListFragmentInteractionListener {
+    override fun onFavoriteListFragmentInteraction(item: Favorite) {
+        startActivity<MatchDetailActivity>("eventId" to item.eventId.toString()
+                , "homeTeam" to item.homeName
+                , "awayTeam" to item.awayName)
+    }
 
     override fun onListFragmentInteraction(item: MatchItem) {
-        startActivity<MatchDetailActivity>("idEvent" to item.idEvent
+        startActivity<MatchDetailActivity>("eventId" to item.eventId
                 , "homeTeam" to item.homeTeam
-                , "homeScore" to item.homeScore
-                , "awayTeam" to item.awayTeam
-                , "awayScore" to item.awayScore
-                , "schedule" to item.matchSchedule)
-
+                , "awayTeam" to item.awayTeam)
     }
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -60,7 +63,6 @@ class MainActivity : AppCompatActivity(), MatchItemFragment.OnListFragmentIntera
     private fun openFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fragment_container, fragment)
-            addToBackStack(null)
             commit()
         }
     }

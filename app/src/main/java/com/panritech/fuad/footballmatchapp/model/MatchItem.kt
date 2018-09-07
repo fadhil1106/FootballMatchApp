@@ -3,21 +3,21 @@ package com.panritech.fuad.footballmatchapp.model
 import com.google.gson.annotations.SerializedName
 
 data class MatchItem(
-    @SerializedName("idEvent")
-    var idEvent: String? = "",
+        @SerializedName("idEvent")
+    var eventId: String? = "",
 
-    @SerializedName("dateEvent")
+        @SerializedName("dateEvent")
     var matchSchedule: String? = "",
 
-    @SerializedName("strHomeTeam")
+        @SerializedName("strHomeTeam")
     var homeTeam: String? = "",
 
-    @SerializedName("strAwayTeam")
+        @SerializedName("strAwayTeam")
     var awayTeam: String? = "",
 
-    @SerializedName("intHomeScore")
+        @SerializedName("intHomeScore")
     var homeScore: String? = "",
 
-    @SerializedName("intAwayScore")
+        @SerializedName("intAwayScore")
     var awayScore: String? = ""
 )

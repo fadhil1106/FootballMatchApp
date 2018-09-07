@@ -1,18 +1,28 @@
 package com.panritech.fuad.footballmatchapp
 
+import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.google.gson.Gson
 import com.panritech.fuad.footballmatchapp.api.ApiRepository
+import com.panritech.fuad.footballmatchapp.model.Favorite
 import com.panritech.fuad.footballmatchapp.model.MatchDetailItem
 import com.panritech.fuad.footballmatchapp.model.TeamBadge
 import com.panritech.fuad.footballmatchapp.presenter.MatchDetailPresenter
 import com.panritech.fuad.footballmatchapp.view.MatchDetailView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_match_detail.*
+import org.jetbrains.anko.db.classParser
+import org.jetbrains.anko.db.delete
+import org.jetbrains.anko.db.insert
+import org.jetbrains.anko.db.select
+import org.jetbrains.anko.design.snackbar
 
 class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
     override fun showHomeBadge(data: List<TeamBadge>) {
@@ -25,33 +35,37 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         hideProgressBar(awayProgress)
     }
 
+    private val detail:MutableList<MatchDetailItem> = mutableListOf()
+
     private lateinit var presenter: MatchDetailPresenter
     private lateinit var detailProgress: ProgressBar
     private lateinit var homeProgress: ProgressBar
     private lateinit var awayProgress: ProgressBar
+
+    private var menuItem: Menu? = null
+    private var isFavorite: Boolean = false
+
+    private var idEvent: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_match_detail)
 
         title = "Match Detail"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val idEvent = intent.getStringExtra("idEvent")
+        idEvent = intent.getStringExtra("eventId")
         val homeTeam = intent.getStringExtra("homeTeam")
         val awayTeam = intent.getStringExtra("awayTeam")
-        val homeScore = intent.getStringExtra("homeScore")
-        val awayScore = intent.getStringExtra("awayScore")
-        val matchSchedule = intent.getStringExtra("schedule")
+        Log.e("ID Event: ", idEvent)
+        checkFavorite()
 
         detailProgress = detailProgressBar
         homeProgress = homeProgressBar
         awayProgress = awayProgessBar
 
         homeTeamName.text = homeTeam
-        homeTeamScore.text = homeScore
         awayTeamName.text = awayTeam
-        awayTeamScore.text = awayScore
-        eventSchedule.text = matchSchedule
 
         showProgressBar(detailProgress)
         showProgressBar(homeProgress)
@@ -67,7 +81,35 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
 
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.detail_menu, menu)
+        menuItem = menu
+        setFavoriteIcon(isFavorite)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> {
+                finish()
+            }
+            R.id.add_to_favorite -> {
+                if (isFavorite) removeFromFavorite()
+                else addToFavorite()
+
+                setFavoriteIcon(isFavorite)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun showMatchDetail(data: List<MatchDetailItem>) {
+        detail.clear()
+        detail.addAll(data)
+
+        val matchSchedule = data[0].matchSchedule.toString()
+
+        val homeScore = getString("",data[0].homeScore.toString())
         val homeFormation = data[0].homeFormation.toString().trim()
         val homeGoalDetail = getList(data[0].homeGoalDetails)
         val homeRedCard = getList(data[0].homeRedCard)
@@ -78,6 +120,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         val homeForward = getList(data[0].homeForward)
         val homeSubstitutes = getList(data[0].homeSubstitutes)
 
+        val awayScore = getString("",data[0].awayScore.toString())
         val awayFormation = data[0].awayFormation.toString().trim()
         val awayGoalDetail = getList(data[0].awayGoalDetails)
         val awayRedCard = getList(data[0].awayRedCard)
@@ -87,6 +130,11 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         val awayMidfield = getList(data[0].awayMidfield)
         val awayForward = getList(data[0].awayForward)
         val awaySubstitutes = getList(data[0].awaySubstitutes)
+
+
+        homeTeamScore.text = homeScore
+        awayTeamScore.text = awayScore
+        eventSchedule.text = matchSchedule
 
         txtHomeFormation.text = getString("", homeFormation)
         setDetailText(homeGoalDetail, txtHomeGoals)
@@ -119,6 +167,55 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         progressBar.visibility = View.GONE
     }
 
+    private fun setFavoriteIcon(favorite: Boolean){
+        if (favorite) {
+            menuItem?.findItem(R.id.add_to_favorite)?.icon = getDrawable(R.drawable.like_filled_icon)
+        }else{
+            menuItem?.findItem(R.id.add_to_favorite)?.icon = getDrawable(R.drawable.like_icon)
+        }
+    }
+
+    private fun addToFavorite(){
+        try {
+            database.use {
+                insert(Favorite.TABLE_FAVORITES,
+                        Favorite.EVENT_ID to idEvent.toInt(),
+                        Favorite.MATCH_SCHEDULE to detail[0].matchSchedule.toString(),
+                        Favorite.HOME_NAME to detail[0].homeTeam.toString(),
+                        Favorite.AWAY_NAME to detail[0].awayTeam.toString(),
+                        Favorite.HOME_SCORE to detail[0].homeScore.toString(),
+                        Favorite.AWAY_SCORE to detail[0].awayScore.toString())
+            }
+            snackbar(detailRootLayout,"Added to Favorites").show()
+            isFavorite = true
+        }catch (e: SQLiteConstraintException){
+            snackbar(detailRootLayout,e.localizedMessage).show()
+        }
+    }
+
+    private fun removeFromFavorite() {
+        try {
+            database.use {
+                delete(Favorite.TABLE_FAVORITES
+                        ,"(EVENT_ID = {eventId})"
+                        , "eventId" to idEvent)
+            }
+            snackbar(detailRootLayout,"Removed From Favorites").show()
+            isFavorite = false
+        }catch (e: SQLiteConstraintException){
+            snackbar(detailRootLayout, e.localizedMessage)
+        }
+    }
+
+    private fun checkFavorite(){
+        database.use {
+            val result = select(Favorite.TABLE_FAVORITES)
+                    .whereArgs("(EVENT_ID = {eventId})", "eventId" to idEvent)
+            val favorite = result.parseList(classParser<Favorite>())
+            if (!favorite.isEmpty()) isFavorite = true
+        }
+    }
+
     private fun getList(details: String?): List<String> {
         return details.toString().split(";")
     }
@@ -127,7 +224,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         return if (value != "null")
             getString(R.string.detail_text, text, value)
         else
-            getString(R.string.detail_text, "", "No Data")
+            getString(R.string.detail_text, "", "")
     }
 
     private fun setDetailText(list: List<String>, txtView: TextView) {
