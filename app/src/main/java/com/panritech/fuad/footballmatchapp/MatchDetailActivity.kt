@@ -35,7 +35,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         hideProgressBar(awayProgress)
     }
 
-    private val detail:MutableList<MatchDetailItem> = mutableListOf()
+    private val detail: MutableList<MatchDetailItem> = mutableListOf()
 
     private lateinit var presenter: MatchDetailPresenter
     private lateinit var detailProgress: ProgressBar
@@ -90,7 +90,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             android.R.id.home -> {
                 finish()
             }
@@ -100,7 +100,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
                     else addToFavorite()
 
                     setFavoriteIcon(isFavorite)
-                }else{
+                } else {
                     toast("Wait Until Finish Displaying Data")
                 }
             }
@@ -114,7 +114,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
 
         val matchSchedule = data[0].matchSchedule.toString()
 
-        val homeScore = getString("",data[0].homeScore.toString())
+        val homeScore = getString("", data[0].homeScore.toString())
         val homeFormation = data[0].homeFormation.toString().trim()
         val homeGoalDetail = getList(data[0].homeGoalDetails)
         val homeRedCard = getList(data[0].homeRedCard)
@@ -125,7 +125,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         val homeForward = getList(data[0].homeForward)
         val homeSubstitutes = getList(data[0].homeSubstitutes)
 
-        val awayScore = getString("",data[0].awayScore.toString())
+        val awayScore = getString("", data[0].awayScore.toString())
         val awayFormation = data[0].awayFormation.toString().trim()
         val awayGoalDetail = getList(data[0].awayGoalDetails)
         val awayRedCard = getList(data[0].awayRedCard)
@@ -172,15 +172,15 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         progressBar.visibility = View.GONE
     }
 
-    private fun setFavoriteIcon(favorite: Boolean){
+    private fun setFavoriteIcon(favorite: Boolean) {
         if (favorite) {
             menuItem?.findItem(R.id.add_to_favorite)?.icon = getDrawable(R.drawable.like_filled_icon)
-        }else{
+        } else {
             menuItem?.findItem(R.id.add_to_favorite)?.icon = getDrawable(R.drawable.like_icon)
         }
     }
 
-    private fun addToFavorite(){
+    private fun addToFavorite() {
         try {
             database.use {
                 insert(Favorite.TABLE_FAVORITES,
@@ -191,10 +191,10 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
                         Favorite.HOME_SCORE to detail[0].homeScore.toString(),
                         Favorite.AWAY_SCORE to detail[0].awayScore.toString())
             }
-            snackbar(detailRootLayout,"Added to Favorites").show()
+            snackbar(detailRootLayout, "Added to Favorites").show()
             isFavorite = true
-        }catch (e: SQLiteConstraintException){
-            snackbar(detailRootLayout,e.localizedMessage).show()
+        } catch (e: SQLiteConstraintException) {
+            snackbar(detailRootLayout, e.localizedMessage).show()
         }
     }
 
@@ -202,17 +202,17 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         try {
             database.use {
                 delete(Favorite.TABLE_FAVORITES
-                        ,"(EVENT_ID = {eventId})"
+                        , "(EVENT_ID = {eventId})"
                         , "eventId" to idEvent)
             }
-            snackbar(detailRootLayout,"Removed From Favorites").show()
+            snackbar(detailRootLayout, "Removed From Favorites").show()
             isFavorite = false
-        }catch (e: SQLiteConstraintException){
+        } catch (e: SQLiteConstraintException) {
             snackbar(detailRootLayout, e.localizedMessage)
         }
     }
 
-    private fun checkFavorite(){
+    private fun checkFavorite() {
         database.use {
             val result = select(Favorite.TABLE_FAVORITES)
                     .whereArgs("(EVENT_ID = {eventId})", "eventId" to idEvent)

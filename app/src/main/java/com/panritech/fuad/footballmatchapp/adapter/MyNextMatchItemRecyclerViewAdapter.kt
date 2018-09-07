@@ -1,14 +1,13 @@
 package com.panritech.fuad.footballmatchapp.adapter
 
+
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-
-
-import com.panritech.fuad.footballmatchapp.fragment.NextMatchItemFragment.OnListFragmentInteractionListener
 import com.panritech.fuad.footballmatchapp.R
+import com.panritech.fuad.footballmatchapp.fragment.NextMatchItemFragment.OnListFragmentInteractionListener
 import com.panritech.fuad.footballmatchapp.model.MatchItem
 import org.jetbrains.anko.find
 
@@ -36,7 +35,7 @@ class MyNextMatchItemRecyclerViewAdapter(
         val awayTeam: TextView = view.find(R.id.awayTeam)
         val awayScore: TextView = view.find(R.id.awayTeamScore)
 
-        fun bindItem(items: MatchItem){
+        fun bindItem(items: MatchItem) {
             matchSchedule.text = items.matchSchedule
             homeTeam.text = items.homeTeam
             homeScore.text = items.homeScore

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import com.panritech.fuad.footballmatchapp.fragment.FavoritesFragment
 import com.panritech.fuad.footballmatchapp.fragment.MatchItemFragment
 import com.panritech.fuad.footballmatchapp.fragment.NextMatchItemFragment
@@ -14,8 +13,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity(), MatchItemFragment.OnListFragmentInteractionListener
-                    , NextMatchItemFragment.OnListFragmentInteractionListener
-                    , FavoritesFragment.OnListFragmentInteractionListener {
+        , NextMatchItemFragment.OnListFragmentInteractionListener
+        , FavoritesFragment.OnListFragmentInteractionListener {
     override fun onFavoriteListFragmentInteraction(item: Favorite) {
         startActivity<MatchDetailActivity>("eventId" to item.eventId.toString()
                 , "homeTeam" to item.homeName

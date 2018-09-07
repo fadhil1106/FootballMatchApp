@@ -11,43 +11,43 @@ object TheSportDBApi {
                 .appendPath("json")
                 .appendPath(BuildConfig.TSDB_API_KEY)
                 .appendPath("eventspastleague.php")
-                .appendQueryParameter("id",league)
+                .appendQueryParameter("id", league)
                 .build()
                 .toString()
     }
 
-    fun getNextMatch(league: String? = "4328"): String{
+    fun getNextMatch(league: String? = "4328"): String {
         return Uri.parse(BuildConfig.BASE_URL).buildUpon()
                 .appendPath("api")
                 .appendPath("v1")
                 .appendPath("json")
                 .appendPath(BuildConfig.TSDB_API_KEY)
                 .appendPath("eventsnextleague.php")
-                .appendQueryParameter("id",league)
+                .appendQueryParameter("id", league)
                 .build()
                 .toString()
     }
 
-    fun getMatchDetail(events: String? =""): String{
+    fun getMatchDetail(events: String? = ""): String {
         return Uri.parse(BuildConfig.BASE_URL).buildUpon()
                 .appendPath("api")
                 .appendPath("v1")
                 .appendPath("json")
                 .appendPath(BuildConfig.TSDB_API_KEY)
                 .appendPath("lookupevent.php")
-                .appendQueryParameter("id",events)
+                .appendQueryParameter("id", events)
                 .build()
                 .toString()
     }
 
-    fun getBadgeUrl(team: String? = ""): String{
+    fun getBadgeUrl(team: String? = ""): String {
         return Uri.parse(BuildConfig.BASE_URL).buildUpon()
                 .appendPath("api")
                 .appendPath("v1")
                 .appendPath("json")
                 .appendPath(BuildConfig.TSDB_API_KEY)
                 .appendPath("searchteams.php")
-                .appendQueryParameter("t",team)
+                .appendQueryParameter("t", team)
                 .build()
                 .toString()
     }

@@ -22,7 +22,7 @@ import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.select
 import org.jetbrains.anko.support.v4.onRefresh
 
-class FavoritesFragment : Fragment(), MatchView{
+class FavoritesFragment : Fragment(), MatchView {
 
     private var match: MutableList<Favorite> = mutableListOf()
     private var listener: FavoritesFragment.OnListFragmentInteractionListener? = null
@@ -37,9 +37,10 @@ class FavoritesFragment : Fragment(), MatchView{
     override fun hideProgressBar() {
         progressBar.visibility = View.GONE
     }
-    override fun showMatchList(data: List<MatchItem>){}
 
-    private fun showFavorites(){
+    override fun showMatchList(data: List<MatchItem>) {}
+
+    private fun showFavorites() {
         context?.database?.use {
             swipeRefresh.isRefreshing = false
             val result = select(Favorite.TABLE_FAVORITES)
@@ -56,7 +57,7 @@ class FavoritesFragment : Fragment(), MatchView{
         val view = inflater.inflate(R.layout.fragment_favorites, container, false)
 
         val recycleView = view.findViewById<RecyclerView>(R.id.listMatch)
-        recycleView.layoutManager =  LinearLayoutManager(context)
+        recycleView.layoutManager = LinearLayoutManager(context)
         adapter = MyFavoritesRecyclerViewAdapter(match, listener)
         recycleView.adapter = adapter
 

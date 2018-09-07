@@ -11,17 +11,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import com.google.gson.Gson
-import com.panritech.fuad.footballmatchapp.presenter.MatchPresenter
 import com.panritech.fuad.footballmatchapp.R
-import com.panritech.fuad.footballmatchapp.view.MatchView
 import com.panritech.fuad.footballmatchapp.adapter.MyNextMatchItemRecyclerViewAdapter
 import com.panritech.fuad.footballmatchapp.api.ApiRepository
-
 import com.panritech.fuad.footballmatchapp.model.MatchItem
+import com.panritech.fuad.footballmatchapp.presenter.MatchPresenter
+import com.panritech.fuad.footballmatchapp.view.MatchView
 import kotlinx.android.synthetic.main.fragment_matchitem.view.*
 import org.jetbrains.anko.support.v4.onRefresh
 
-class NextMatchItemFragment : Fragment() , MatchView{
+class NextMatchItemFragment : Fragment(), MatchView {
 
     override fun showProgressBar() {
         progressBar.visibility = View.VISIBLE
@@ -30,7 +29,8 @@ class NextMatchItemFragment : Fragment() , MatchView{
     override fun hideProgressBar() {
         progressBar.visibility = View.GONE
     }
-    override fun showMatchList(data: List<MatchItem>){
+
+    override fun showMatchList(data: List<MatchItem>) {
 
         swipeRefresh.isRefreshing = false
         match.clear()
@@ -51,7 +51,7 @@ class NextMatchItemFragment : Fragment() , MatchView{
         val view = inflater.inflate(R.layout.fragment_nextmatchitem, container, false)
 
         val recycleView = view.findViewById<RecyclerView>(R.id.listMatch)
-        recycleView.layoutManager =  LinearLayoutManager(context)
+        recycleView.layoutManager = LinearLayoutManager(context)
         adapter = MyNextMatchItemRecyclerViewAdapter(match, listener)
         recycleView.adapter = adapter
 

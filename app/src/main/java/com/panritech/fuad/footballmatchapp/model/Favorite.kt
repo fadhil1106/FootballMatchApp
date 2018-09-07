@@ -1,6 +1,6 @@
 package com.panritech.fuad.footballmatchapp.model
 
-data class Favorite (val eventId: Int, val matchSchedule: String, val homeName: String, val awayName: String, val homeScore: String, val awayScore: String){
+data class Favorite(val eventId: Int, val matchSchedule: String, val homeName: String, val awayName: String, val homeScore: String, val awayScore: String) {
 
     companion object {
         const val TABLE_FAVORITES: String = "TABLE_FAVORITES"

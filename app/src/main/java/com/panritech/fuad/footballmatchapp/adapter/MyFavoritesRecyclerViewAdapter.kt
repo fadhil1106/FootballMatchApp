@@ -37,11 +37,11 @@ class MyFavoritesRecyclerViewAdapter(
         val awayTeam: TextView = view.find(R.id.awayTeam)
         val awayScore: TextView = view.find(R.id.awayTeamScore)
 
-        fun bindItem(items: Favorite){
+        fun bindItem(items: Favorite) {
 
-            setText(matchSchedule,items.matchSchedule)
-            setText(homeTeam,items.homeName)
-            setText(homeScore,items.homeScore)
+            setText(matchSchedule, items.matchSchedule)
+            setText(homeTeam, items.homeName)
+            setText(homeScore, items.homeScore)
             setText(awayTeam, items.awayName)
             setText(awayScore, items.awayScore)
 
