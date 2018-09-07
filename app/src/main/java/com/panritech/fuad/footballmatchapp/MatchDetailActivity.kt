@@ -3,7 +3,6 @@ package com.panritech.fuad.footballmatchapp
 import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -23,6 +22,7 @@ import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 import org.jetbrains.anko.design.snackbar
+import org.jetbrains.anko.toast
 
 class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
     override fun showHomeBadge(data: List<TeamBadge>) {
@@ -44,6 +44,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
 
     private var menuItem: Menu? = null
     private var isFavorite: Boolean = false
+    private var isGetDataFinished = false
 
     private var idEvent: String = ""
 
@@ -57,7 +58,6 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         idEvent = intent.getStringExtra("eventId")
         val homeTeam = intent.getStringExtra("homeTeam")
         val awayTeam = intent.getStringExtra("awayTeam")
-        Log.e("ID Event: ", idEvent)
         checkFavorite()
 
         detailProgress = detailProgressBar
@@ -72,6 +72,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         showProgressBar(awayProgress)
         val apiRequest = ApiRepository()
         val gson = Gson()
+        isGetDataFinished = false
         presenter = MatchDetailPresenter(this, apiRequest, gson)
         presenter.run {
             getMatchDetail(idEvent)
@@ -94,10 +95,14 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
                 finish()
             }
             R.id.add_to_favorite -> {
-                if (isFavorite) removeFromFavorite()
-                else addToFavorite()
+                if (isGetDataFinished) {
+                    if (isFavorite) removeFromFavorite()
+                    else addToFavorite()
 
-                setFavoriteIcon(isFavorite)
+                    setFavoriteIcon(isFavorite)
+                }else{
+                    toast("Wait Until Finish Displaying Data")
+                }
             }
         }
         return super.onOptionsItemSelected(item)
@@ -155,7 +160,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         setDetailText(awayMidfield, txtAwayMidfield)
         setDetailText(awayForward, txtAwayForward)
         setDetailText(awaySubstitutes, txtAwaySubstitutes)
-
+        isGetDataFinished = true
         hideProgressBar(detailProgress)
     }
 
