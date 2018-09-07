@@ -1,17 +1,16 @@
 package com.panritech.fuad.footballmatchapp
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.google.gson.Gson
-import com.panritech.fuad.footballmatchapp.presenter.MatchDetailPresenter
-import com.panritech.fuad.footballmatchapp.view.MatchDetailView
 import com.panritech.fuad.footballmatchapp.api.ApiRepository
 import com.panritech.fuad.footballmatchapp.model.MatchDetailItem
 import com.panritech.fuad.footballmatchapp.model.TeamBadge
+import com.panritech.fuad.footballmatchapp.presenter.MatchDetailPresenter
+import com.panritech.fuad.footballmatchapp.view.MatchDetailView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_match_detail.*
 
@@ -34,6 +33,8 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_match_detail)
+
+        title = "Match Detail"
 
         val idEvent = intent.getStringExtra("idEvent")
         val homeTeam = intent.getStringExtra("homeTeam")
@@ -58,16 +59,18 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         val apiRequest = ApiRepository()
         val gson = Gson()
         presenter = MatchDetailPresenter(this, apiRequest, gson)
-        presenter.getMatchDetail(idEvent)
-        presenter.getBadgeUrl(homeTeam,"home")
-        presenter.getBadgeUrl(awayTeam,"away")
+        presenter.run {
+            getMatchDetail(idEvent)
+            getBadgeUrl(homeTeam, "home")
+            getBadgeUrl(awayTeam, "away")
+        }
 
     }
 
     override fun showMatchDetail(data: List<MatchDetailItem>) {
         val homeFormation = data[0].homeFormation.toString().trim()
         val homeGoalDetail = getList(data[0].homeGoalDetails)
-        val homeRedCard =  getList(data[0].homeRedCard)
+        val homeRedCard = getList(data[0].homeRedCard)
         val homeYellowCard = getList(data[0].homeYellowCard)
         val homeGoalkeeper = getList(data[0].homeGoalkeeper)
         val homeDefense = getList(data[0].homeDefense)
@@ -85,7 +88,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         val awayForward = getList(data[0].awayForward)
         val awaySubstitutes = getList(data[0].awaySubstitutes)
 
-        txtHomeFormation.text = getString("",homeFormation)
+        txtHomeFormation.text = getString("", homeFormation)
         setDetailText(homeGoalDetail, txtHomeGoals)
         setDetailText(homeRedCard, txtHomeRedCard)
         setDetailText(homeYellowCard, txtHomeYellowCard)
@@ -95,7 +98,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         setDetailText(homeForward, txtHomeForward)
         setDetailText(homeSubstitutes, txtHomeSubstitutes)
 
-        txtAwayFormation.text = getString("",awayFormation)
+        txtAwayFormation.text = getString("", awayFormation)
         setDetailText(awayGoalDetail, txtAwayGoals)
         setDetailText(awayRedCard, txtAwayRedCard)
         setDetailText(awayYellowCard, txtAwayYellowCard)
@@ -121,13 +124,15 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
     }
 
     private fun getString(text: String, value: String): String {
-        return if (value!= "null")
+        return if (value != "null")
             getString(R.string.detail_text, text, value)
         else
-            getString(R.string.detail_text,"","No Data")
+            getString(R.string.detail_text, "", "No Data")
     }
 
     private fun setDetailText(list: List<String>, txtView: TextView) {
-        for (value in list){ txtView.text = getString(txtView.text.toString(), value.trim()) }
+        list.forEach { value ->
+            txtView.text = getString(txtView.text.toString(), value.trim())
+        }
     }
 }

@@ -50,9 +50,6 @@ class MatchItemFragment : Fragment(), MatchView {
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_matchitem, container, false)
 
-        //adapter = MyMatchItemRecyclerViewAdapter()
-        // Set the adapter
-
         val recycleView = view.findViewById<RecyclerView>(R.id.listMatch)
         recycleView.layoutManager =  LinearLayoutManager(context)
         adapter = MyMatchItemRecyclerViewAdapter(match, listener)
@@ -80,11 +77,11 @@ class MatchItemFragment : Fragment(), MatchView {
             throw RuntimeException(context.toString() + " must implement OnListFragmentInteractionListener")
         }
     }
-//
-//    override fun onDetach() {
-//        super.onDetach()
-//        listener = null
-//    }
+
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
+    }
 
     /**
      * This interface must be implemented by activities that contain this

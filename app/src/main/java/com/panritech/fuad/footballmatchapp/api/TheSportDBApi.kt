@@ -1,7 +1,6 @@
 package com.panritech.fuad.footballmatchapp.api
 
 import android.net.Uri
-import android.util.Log
 import com.panritech.fuad.footballmatchapp.BuildConfig
 
 object TheSportDBApi {

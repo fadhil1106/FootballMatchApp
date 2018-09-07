@@ -10,4 +10,10 @@
         android:icon="@drawable/schedule_icon"
         android:title="@string/title_next_match" />
 
+    <item
+        android:id="@+id/navigation_favorites"
+        android:icon="@drawable/heart_icon"
+        android:title="@string/title_favorites"
+        />
+
 </menu>
