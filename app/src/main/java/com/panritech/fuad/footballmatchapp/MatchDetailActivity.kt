@@ -1,5 +1,6 @@
 package com.panritech.fuad.footballmatchapp
 
+import android.annotation.SuppressLint
 import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -225,7 +226,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         return details.toString().split(";")
     }
 
-    private fun getString(text: String, value: String): String {
+    fun getString(text: String, value: String): String {
         return if (value != "null")
             getString(R.string.detail_text, text, value)
         else

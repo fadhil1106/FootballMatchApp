@@ -4,7 +4,7 @@ import android.net.Uri
 import com.panritech.fuad.footballmatchapp.BuildConfig
 
 object TheSportDBApi {
-    fun getMach(league: String? = "4328"): String {
+    fun getMatch(league: String? = "4328"): String {
         return Uri.parse(BuildConfig.BASE_URL).buildUpon()
                 .appendPath("api")
                 .appendPath("v1")

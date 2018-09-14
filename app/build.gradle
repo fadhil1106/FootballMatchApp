@@ -45,8 +45,17 @@ dependencies {
     implementation "org.jetbrains.anko:anko-recyclerview-v7-coroutines:$anko_version"
 
     implementation 'com.google.code.gson:gson:2.8.5'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.23.4"
 
     testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:2.21.0'
+    testImplementation 'org.mockito:mockito-inline:2.21.0'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
 }
