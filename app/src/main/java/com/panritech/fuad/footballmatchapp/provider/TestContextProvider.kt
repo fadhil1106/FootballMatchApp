@@ -1,4 +1,4 @@
-package com.panritech.fuad.footballmatchapp
+package com.panritech.fuad.footballmatchapp.provider
 
 import kotlinx.coroutines.experimental.Unconfined
 import kotlin.coroutines.experimental.CoroutineContext

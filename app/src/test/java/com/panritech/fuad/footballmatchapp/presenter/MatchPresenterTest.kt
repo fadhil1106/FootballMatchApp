@@ -1,22 +1,15 @@
 package com.panritech.fuad.footballmatchapp.presenter
 
 import com.google.gson.Gson
-import com.panritech.fuad.footballmatchapp.TestContextProvider
+import com.panritech.fuad.footballmatchapp.provider.TestContextProvider
 import com.panritech.fuad.footballmatchapp.api.ApiRepository
 import com.panritech.fuad.footballmatchapp.api.TheSportDBApi
 import com.panritech.fuad.footballmatchapp.model.MatchItem
 import com.panritech.fuad.footballmatchapp.model.MatchItemResponse
 import com.panritech.fuad.footballmatchapp.view.MatchView
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.delay
 import kotlinx.coroutines.experimental.launch
-import kotlinx.coroutines.experimental.runBlocking
-import org.jetbrains.anko.coroutines.experimental.bg
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 import org.junit.Test
 import org.junit.Before
-import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.verify

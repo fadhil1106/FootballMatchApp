@@ -1,15 +1,13 @@
 package com.panritech.fuad.footballmatchapp.presenter
 
 import com.google.gson.Gson
-import com.panritech.fuad.footballmatchapp.CoroutineContextProvider
+import com.panritech.fuad.footballmatchapp.provider.CoroutineContextProvider
 import com.panritech.fuad.footballmatchapp.api.ApiRepository
 import com.panritech.fuad.footballmatchapp.api.TheSportDBApi
 import com.panritech.fuad.footballmatchapp.model.MatchItemResponse
 import com.panritech.fuad.footballmatchapp.view.MatchView
 import kotlinx.coroutines.experimental.async
 import org.jetbrains.anko.coroutines.experimental.bg
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 
 class MatchPresenter(private val matchView: MatchView,
                      private val apiRepository: ApiRepository,

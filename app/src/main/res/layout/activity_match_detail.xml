@@ -56,17 +56,18 @@
         <TextView
             android:id="@+id/homeTeamScore"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:textAlignment="center"
+            android:gravity="center_vertical"
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/textView2"
             app:layout_constraintHorizontal_bias="0.9"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
             android:id="@+id/homeBadge"
@@ -95,9 +96,10 @@
         <TextView
             android:id="@+id/awayTeamScore"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
+            android:gravity="center_vertical"
             android:textAlignment="center"
             android:textSize="30sp"
             android:textStyle="bold"
@@ -105,7 +107,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.1"
             app:layout_constraintStart_toEndOf="@+id/textView2"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
             android:id="@+id/awayBadge"
@@ -133,7 +136,7 @@
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:gravity="center_vertical"
             android:text="@string/vs"
             android:textSize="14sp"
@@ -141,7 +144,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.51" />
     </android.support.constraint.ConstraintLayout>
 
     <ProgressBar

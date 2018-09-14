@@ -113,9 +113,15 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         detail.clear()
         detail.addAll(data)
 
+        var homeScore = data[0].homeScore.toString()
+        var awayScore = data[0].awayScore.toString()
+
+        if (data[0].homeScore.toString() == "null") homeScore = ""
+
+        if (data[0].awayScore.toString() == "null") awayScore = ""
+
         val matchSchedule = data[0].matchSchedule.toString()
 
-        val homeScore = getString("", data[0].homeScore.toString())
         val homeFormation = data[0].homeFormation.toString().trim()
         val homeGoalDetail = getList(data[0].homeGoalDetails)
         val homeRedCard = getList(data[0].homeRedCard)
@@ -126,7 +132,6 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         val homeForward = getList(data[0].homeForward)
         val homeSubstitutes = getList(data[0].homeSubstitutes)
 
-        val awayScore = getString("", data[0].awayScore.toString())
         val awayFormation = data[0].awayFormation.toString().trim()
         val awayGoalDetail = getList(data[0].awayGoalDetails)
         val awayRedCard = getList(data[0].awayRedCard)
@@ -226,7 +231,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         return details.toString().split(";")
     }
 
-    fun getString(text: String, value: String): String {
+    private fun getString(text: String, value: String): String {
         return if (value != "null")
             getString(R.string.detail_text, text, value)
         else
