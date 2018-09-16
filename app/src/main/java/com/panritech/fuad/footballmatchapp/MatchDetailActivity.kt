@@ -1,6 +1,5 @@
 package com.panritech.fuad.footballmatchapp
 
-import android.annotation.SuppressLint
 import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -29,11 +28,13 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
     override fun showHomeBadge(data: List<TeamBadge>) {
         Picasso.get().load(data[0].teamBadge).into(homeBadge)
         hideProgressBar(homeProgress)
+        homeBadge.visibility = View.VISIBLE
     }
 
     override fun showAwayBadge(data: List<TeamBadge>) {
         Picasso.get().load(data[0].teamBadge).into(awayBadge)
         hideProgressBar(awayProgress)
+        awayBadge.visibility = View.VISIBLE
     }
 
     private val detail: MutableList<MatchDetailItem> = mutableListOf()
@@ -168,6 +169,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         setDetailText(awaySubstitutes, txtAwaySubstitutes)
         isGetDataFinished = true
         hideProgressBar(detailProgress)
+        detailTable.visibility = View.VISIBLE
     }
 
     override fun showProgressBar(progressBar: ProgressBar) {

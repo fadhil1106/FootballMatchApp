@@ -152,7 +152,7 @@
         android:id="@+id/detailProgressBar"
         style="?android:attr/progressBarStyle"
         android:layout_width="match_parent"
-        android:layout_height="25dp"
+        android:layout_height="30dp"
         android:layout_marginTop="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -165,9 +165,11 @@
         android:layout_height="match_parent">
 
         <TableLayout
+            android:id="@+id/detailTable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="1dp">
+            android:layout_margin="1dp"
+            android:visibility="gone">
 
             <TableRow
                 android:id="@+id/rowFormation"
