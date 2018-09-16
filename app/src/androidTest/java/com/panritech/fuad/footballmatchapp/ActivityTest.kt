@@ -54,6 +54,7 @@ class ActivityTest {
     }
 
     private fun testFavoriteBehavior() {
+        onView(withId(navigation_favorites)).perform(click())
         onView(withId(listMatch)).check(matches(isDisplayed()))
         onView(withId(listMatch)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
         pressBack()
