@@ -25,15 +25,11 @@ class ActivityTest {
     fun testAppBehavior() {
         //test Match Fragment Behavior
         testMatchListBehavior()
-
         testDetailBehavior()
-
         //test Next Match Fragment Behavior
         onView(withId(navigation_next_match)).perform(click())
         testMatchListBehavior()
-
         testDetailBehavior()
-
         //test Favorite Match Fragment Behavior
         testFavoriteBehavior()
     }
