@@ -11,12 +11,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import com.google.gson.Gson
-import com.panritech.fuad.footballmatchapp.presenter.MatchPresenter
-import com.panritech.fuad.footballmatchapp.view.MatchView
-import com.panritech.fuad.footballmatchapp.adapter.MyMatchItemRecyclerViewAdapter
 import com.panritech.fuad.footballmatchapp.R
+import com.panritech.fuad.footballmatchapp.adapter.MyMatchItemRecyclerViewAdapter
 import com.panritech.fuad.footballmatchapp.api.ApiRepository
 import com.panritech.fuad.footballmatchapp.model.MatchItem
+import com.panritech.fuad.footballmatchapp.presenter.MatchPresenter
+import com.panritech.fuad.footballmatchapp.view.MatchView
 import kotlinx.android.synthetic.main.fragment_matchitem.view.*
 import org.jetbrains.anko.support.v4.onRefresh
 
@@ -36,7 +36,8 @@ class MatchItemFragment : Fragment(), MatchView {
     override fun hideProgressBar() {
         progressBar.visibility = View.GONE
     }
-    override fun showMatchList(data: List<MatchItem>){
+
+    override fun showMatchList(data: List<MatchItem>) {
 
         swipeRefresh.isRefreshing = false
         match.clear()
@@ -50,11 +51,8 @@ class MatchItemFragment : Fragment(), MatchView {
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_matchitem, container, false)
 
-        //adapter = MyMatchItemRecyclerViewAdapter()
-        // Set the adapter
-
         val recycleView = view.findViewById<RecyclerView>(R.id.listMatch)
-        recycleView.layoutManager =  LinearLayoutManager(context)
+        recycleView.layoutManager = LinearLayoutManager(context)
         adapter = MyMatchItemRecyclerViewAdapter(match, listener)
         recycleView.adapter = adapter
 
@@ -80,11 +78,11 @@ class MatchItemFragment : Fragment(), MatchView {
             throw RuntimeException(context.toString() + " must implement OnListFragmentInteractionListener")
         }
     }
-//
-//    override fun onDetach() {
-//        super.onDetach()
-//        listener = null
-//    }
+
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
+    }
 
     /**
      * This interface must be implemented by activities that contain this

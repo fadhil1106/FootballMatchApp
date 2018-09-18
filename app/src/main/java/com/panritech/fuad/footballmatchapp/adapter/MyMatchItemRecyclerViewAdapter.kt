@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 
 
-import com.panritech.fuad.footballmatchapp.fragment.MatchItemFragment.OnListFragmentInteractionListener
 import com.panritech.fuad.footballmatchapp.R
+import com.panritech.fuad.footballmatchapp.fragment.MatchItemFragment.OnListFragmentInteractionListener
 import com.panritech.fuad.footballmatchapp.model.MatchItem
 import org.jetbrains.anko.find
 

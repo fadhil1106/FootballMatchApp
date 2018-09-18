@@ -10,17 +10,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
-import com.google.gson.Gson
 import com.panritech.fuad.footballmatchapp.R
-import com.panritech.fuad.footballmatchapp.adapter.MyNextMatchItemRecyclerViewAdapter
-import com.panritech.fuad.footballmatchapp.api.ApiRepository
+import com.panritech.fuad.footballmatchapp.adapter.MyFavoritesRecyclerViewAdapter
+import com.panritech.fuad.footballmatchapp.database
+import com.panritech.fuad.footballmatchapp.model.Favorite
+
 import com.panritech.fuad.footballmatchapp.model.MatchItem
-import com.panritech.fuad.footballmatchapp.presenter.MatchPresenter
 import com.panritech.fuad.footballmatchapp.view.MatchView
 import kotlinx.android.synthetic.main.fragment_matchitem.view.*
+import org.jetbrains.anko.db.classParser
+import org.jetbrains.anko.db.select
 import org.jetbrains.anko.support.v4.onRefresh
 
-class NextMatchItemFragment : Fragment(), MatchView {
+class FavoritesFragment : Fragment(), MatchView {
+
+    private var match: MutableList<Favorite> = mutableListOf()
+    private var listener: FavoritesFragment.OnListFragmentInteractionListener? = null
+    private lateinit var adapter: MyFavoritesRecyclerViewAdapter
+    private lateinit var swipeRefresh: SwipeRefreshLayout
+    private lateinit var progressBar: ProgressBar
 
     override fun showProgressBar() {
         progressBar.visibility = View.VISIBLE
@@ -30,42 +38,39 @@ class NextMatchItemFragment : Fragment(), MatchView {
         progressBar.visibility = View.GONE
     }
 
-    override fun showMatchList(data: List<MatchItem>) {
+    override fun showMatchList(data: List<MatchItem>) {}
 
-        swipeRefresh.isRefreshing = false
-        match.clear()
-        match.addAll(data)
-        adapter.notifyDataSetChanged()
-        hideProgressBar()
+    private fun showFavorites() {
+        context?.database?.use {
+            swipeRefresh.isRefreshing = false
+            val result = select(Favorite.TABLE_FAVORITES)
+            val favorite = result.parseList(classParser<Favorite>())
+            match.clear()
+            match.addAll(favorite)
+            adapter.notifyDataSetChanged()
+            hideProgressBar()
+        }
     }
-
-    private var match: MutableList<MatchItem> = mutableListOf()
-    private var listener: NextMatchItemFragment.OnListFragmentInteractionListener? = null
-    private lateinit var adapter: MyNextMatchItemRecyclerViewAdapter
-    private lateinit var presenter: MatchPresenter
-    private lateinit var swipeRefresh: SwipeRefreshLayout
-    private lateinit var progressBar: ProgressBar
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_nextmatchitem, container, false)
+        val view = inflater.inflate(R.layout.fragment_favorites, container, false)
 
         val recycleView = view.findViewById<RecyclerView>(R.id.listMatch)
         recycleView.layoutManager = LinearLayoutManager(context)
-        adapter = MyNextMatchItemRecyclerViewAdapter(match, listener)
+        adapter = MyFavoritesRecyclerViewAdapter(match, listener)
         recycleView.adapter = adapter
 
         swipeRefresh = view.swipeRefresh
         progressBar = view.progressBar
 
         swipeRefresh.onRefresh {
-            presenter.getNextMatchList("4328")
+            showFavorites()
         }
         showProgressBar()
-        val apiRequest = ApiRepository()
-        val gson = Gson()
-        presenter = MatchPresenter(this, apiRequest, gson)
-        presenter.getNextMatchList("4328")
+
+        showFavorites()
+
         return view
     }
 
@@ -95,14 +100,11 @@ class NextMatchItemFragment : Fragment(), MatchView {
      * for more information.
      */
     interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onListFragmentInteraction(item: MatchItem)
+        fun onFavoriteListFragmentInteraction(item: Favorite)
     }
 
     companion object {
-
-        // TODO: Customize parameter initialization
         @JvmStatic
-        fun newInstance() = NextMatchItemFragment()
+        fun newInstance() = FavoritesFragment()
     }
 }

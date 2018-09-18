@@ -22,4 +22,5 @@
     <string name="forward">Forward</string>
     <string name="substitutes">Substitutes</string>
     <string name="detail_text">%1$s\n%2$s</string>
+    <string name="title_favorites">Favorite</string>
 </resources>
