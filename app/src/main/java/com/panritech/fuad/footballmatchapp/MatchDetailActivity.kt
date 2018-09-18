@@ -182,9 +182,9 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
 
     private fun setFavoriteIcon(favorite: Boolean) {
         if (favorite) {
-            menuItem?.findItem(R.id.add_to_favorite)?.icon = getDrawable(R.drawable.like_filled_icon)
+            menuItem?.findItem(R.id.add_to_favorite)?.icon = getDrawable(R.drawable.heart_outline_filled)
         } else {
-            menuItem?.findItem(R.id.add_to_favorite)?.icon = getDrawable(R.drawable.like_icon)
+            menuItem?.findItem(R.id.add_to_favorite)?.icon = getDrawable(R.drawable.heart_outline)
         }
     }
 

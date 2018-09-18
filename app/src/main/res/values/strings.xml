@@ -23,4 +23,7 @@
     <string name="substitutes">Substitutes</string>
     <string name="detail_text">%1$s\n%2$s</string>
     <string name="title_favorites">Favorite</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+    <string name="team">Team</string>
 </resources>
