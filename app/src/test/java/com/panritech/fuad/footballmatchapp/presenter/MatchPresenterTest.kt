@@ -68,7 +68,7 @@ class MatchPresenterTest {
                 ,MatchItemResponse::class.java)).thenReturn(response)
 
         presenter.getNextMatchList(league)
-
+        
         launch {
             verify(matchView).showProgressBar()
             verify(matchView).showMatchList(nextMatch)

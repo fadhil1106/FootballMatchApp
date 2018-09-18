@@ -5,11 +5,13 @@ import android.support.test.espresso.Espresso.pressBack
 import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.contrib.RecyclerViewActions
+import android.support.test.espresso.idling.CountingIdlingResource
 import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
 import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import android.support.v7.widget.RecyclerView
+import android.text.BoringLayout
 import com.panritech.fuad.footballmatchapp.R.id.*
 import org.junit.Rule
 import org.junit.Test
@@ -20,6 +22,7 @@ class ActivityTest {
     @Rule
     @JvmField
     var activityRule = ActivityTestRule(MainActivity::class.java)
+    private val delayTime = 2000L
 
     @Test
     fun testAppBehavior() {
@@ -35,12 +38,14 @@ class ActivityTest {
     }
 
     private fun testMatchListBehavior() {
+        Thread.sleep(delayTime)
         onView(withId(listMatch)).check(matches(isDisplayed()))
         onView(withId(listMatch)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(14))
         onView(withId(listMatch)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(14, click()))
     }
 
     private fun testDetailBehavior() {
+        Thread.sleep(delayTime)
         onView(withId(detailTable)).check(matches(isDisplayed()))
         onView(withId(homeBadge)).check(matches(isDisplayed()))
         onView(withId(awayBadge)).check(matches(isDisplayed()))
@@ -51,6 +56,7 @@ class ActivityTest {
 
     private fun testFavoriteBehavior() {
         onView(withId(navigation_favorites)).perform(click())
+        Thread.sleep(delayTime)
         onView(withId(listMatch)).check(matches(isDisplayed()))
         onView(withId(listMatch)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
         pressBack()
