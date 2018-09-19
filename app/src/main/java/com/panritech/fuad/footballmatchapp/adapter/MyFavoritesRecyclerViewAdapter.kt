@@ -8,7 +8,7 @@ import android.widget.TextView
 import com.panritech.fuad.footballmatchapp.R
 
 
-import com.panritech.fuad.footballmatchapp.fragment.FavoritesFragment.OnListFragmentInteractionListener
+import com.panritech.fuad.footballmatchapp.fragment.FavoritesMatchFragment.OnListFragmentInteractionListener
 import com.panritech.fuad.footballmatchapp.model.Favorite
 import org.jetbrains.anko.find
 
@@ -19,7 +19,7 @@ class MyFavoritesRecyclerViewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.fragment_favorites_list, parent, false)
+                .inflate(R.layout.fragment_favorites_match_list, parent, false)
         return ViewHolder(view)
     }
 

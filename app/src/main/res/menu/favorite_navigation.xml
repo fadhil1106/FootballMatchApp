@@ -6,11 +6,6 @@
         android:icon="@drawable/soccer_icon"
         android:title="@string/title_match" />
     <item
-        android:id="@+id/navigation_next_match"
-        android:icon="@drawable/schedule_icon"
-        android:title="@string/title_next_match" />
-
-    <item
         android:id="@+id/navigation_teams"
         android:icon="@drawable/man_96"
         android:title="@string/team"

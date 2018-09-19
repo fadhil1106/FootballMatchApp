@@ -4,7 +4,8 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import com.panritech.fuad.footballmatchapp.fragment.FavoritesFragment
+import android.view.View
+import com.panritech.fuad.footballmatchapp.fragment.FavoritesMatchFragment
 import com.panritech.fuad.footballmatchapp.fragment.MatchItemFragment
 import com.panritech.fuad.footballmatchapp.fragment.NextMatchItemFragment
 import com.panritech.fuad.footballmatchapp.model.Favorite
@@ -14,7 +15,7 @@ import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity(), MatchItemFragment.OnListFragmentInteractionListener
         , NextMatchItemFragment.OnListFragmentInteractionListener
-        , FavoritesFragment.OnListFragmentInteractionListener {
+        , FavoritesMatchFragment.OnListFragmentInteractionListener {
     override fun onFavoriteListFragmentInteraction(item: Favorite) {
         startActivity<MatchDetailActivity>("eventId" to item.eventId.toString()
                 , "homeTeam" to item.homeName
@@ -41,8 +42,8 @@ class MainActivity : AppCompatActivity(), MatchItemFragment.OnListFragmentIntera
                 title = "Next Match"
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_favorites -> {
-                val fragment = FavoritesFragment.newInstance()
+            R.id.navigation_teams -> {
+                val fragment = FavoritesMatchFragment.newInstance()
                 openFragment(fragment)
                 title = "Favorites"
                 return@OnNavigationItemSelectedListener true
@@ -57,6 +58,10 @@ class MainActivity : AppCompatActivity(), MatchItemFragment.OnListFragmentIntera
         title = "Previous Match"
         openFragment(MatchItemFragment.newInstance())
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+
+        toFavoriteButton.setOnClickListener{v: View ->
+            startActivity<FavoriteActivity>()
+        }
     }
 
     private fun openFragment(fragment: Fragment) {
