@@ -17,7 +17,10 @@ class MainActivity : AppCompatActivity(), MatchItemFragment.OnListFragmentIntera
         , TeamItemFragment.OnListFragmentInteractionListener {
     override fun onListFragmentInteraction(item: TeamItem) {
         startActivity<TeamDetailActivity>("teamId" to item.teamId
-                , "teamBadge" to item.teamBadge)
+                , "teamBadge" to item.teamBadge
+                , "teamName" to item.teamName
+                , "teamYear" to item.teamYear
+                , "teamDescription" to item.teamDescription)
     }
 
     override fun onListFragmentInteraction(item: MatchItem) {
@@ -43,7 +46,7 @@ class MainActivity : AppCompatActivity(), MatchItemFragment.OnListFragmentIntera
             R.id.navigation_teams -> {
                 val fragment = TeamItemFragment.newInstance()
                 openFragment(fragment)
-                title = "Favorites"
+                title = "Team"
                 return@OnNavigationItemSelectedListener true
             }
         }

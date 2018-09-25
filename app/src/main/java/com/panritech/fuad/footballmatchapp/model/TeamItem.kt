@@ -10,5 +10,11 @@ data class TeamItem(
         var teamName: String? = null,
 
         @SerializedName("strTeamBadge")
-        var teamBadge: String? = null
+        var teamBadge: String? = null,
+
+        @SerializedName("intFormedYear")
+        var teamYear: String? = null,
+
+        @SerializedName("strDescriptionEN")
+        var teamDescription: String? = null
 )

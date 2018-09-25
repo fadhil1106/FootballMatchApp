@@ -10,13 +10,19 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
+import com.panritech.fuad.footballmatchapp.fragment.PlayerItemFragment
 import com.panritech.fuad.footballmatchapp.fragment.TeamOverviewFragment
+import com.panritech.fuad.footballmatchapp.model.PlayersItem
 import com.squareup.picasso.Picasso
 
 import kotlinx.android.synthetic.main.activity_team_detail.*
 import org.jetbrains.anko.find
 
-class TeamDetailActivity : AppCompatActivity() {
+class TeamDetailActivity : AppCompatActivity() , PlayerItemFragment.OnListFragmentInteractionListener{
+    override fun onListFragmentInteraction(item: PlayersItem) {
+
+    }
+
     /**
      * The [android.support.v4.view.PagerAdapter] that will provide
      * fragments for each of the sections. We use a
@@ -26,6 +32,10 @@ class TeamDetailActivity : AppCompatActivity() {
      * [android.support.v4.app.FragmentStatePagerAdapter].
      */
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
+    private var strTeamId: String = ""
+    private var strTeamName: String = ""
+    private var strTeamYear: String = ""
+    private var strTeamDescription: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,8 +54,18 @@ class TeamDetailActivity : AppCompatActivity() {
 
         val teamBadge: ImageView = find(R.id.team_badge)
         val strTeamBadge = intent.getStringExtra("teamBadge")
+        strTeamId = intent.getStringExtra("teamId")
+        strTeamName = intent.getStringExtra("teamName")
+        strTeamYear = intent.getStringExtra("teamYear")
+        strTeamDescription = intent.getStringExtra("teamDescription")
+
+        team_name.text = strTeamName
+        team_year.text = strTeamYear
+
         Picasso.get().load(strTeamBadge).into(teamBadge)
         title = ""
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
     }
 
@@ -57,15 +77,21 @@ class TeamDetailActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        val id = item.itemId
-
-        if (id == R.id.item_favorite) {
-            return true
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+            }
+            R.id.add_to_favorite -> {
+//                if (isGetDataFinished) {
+//                    if (isFavorite) removeFromFavorite()
+//                    else addToFavorite()
+//
+//                    setFavoriteIcon(isFavorite)
+//                } else {
+//                    toast("Wait Until Finish Displaying Data")
+//                }
+            }
         }
-
         return super.onOptionsItemSelected(item)
     }
 
@@ -81,8 +107,8 @@ class TeamDetailActivity : AppCompatActivity() {
             // Return a PlaceholderFragment (defined as a static inner class below).
 
             return when (position) {
-                1 -> TeamOverviewFragment.newInstance()
-                else -> TeamOverviewFragment.newInstance()
+                1 -> PlayerItemFragment.newInstance(strTeamId)
+                else -> TeamOverviewFragment.newInstance(strTeamDescription)
             }
         }
 
@@ -91,35 +117,4 @@ class TeamDetailActivity : AppCompatActivity() {
             return 2
         }
     }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-//    class PlaceholderFragment : Fragment() {
-//
-//        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-//                                  savedInstanceState: Bundle?): View? {
-//            return inflater.inflate(R.layout.fragment_team_detail, container, false)
-//        }
-//
-////        companion object {
-////            /**
-////             * The fragment argument representing the section number for this
-////             * fragment.
-////             */
-////            private val ARG_SECTION_NUMBER = "section_number"
-////
-////            /**
-////             * Returns a new instance of this fragment for the given section
-////             * number.
-////             */
-////            fun newInstance(sectionNumber: Int): PlaceholderFragment {
-////                val fragment = PlaceholderFragment()
-////                val args = Bundle()
-////                args.putInt(ARG_SECTION_NUMBER, sectionNumber)
-////                fragment.arguments = args
-////                return fragment
-////            }
-////        }
-//    }
 }
