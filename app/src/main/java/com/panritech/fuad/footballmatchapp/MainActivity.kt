@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import android.view.View
 import com.panritech.fuad.footballmatchapp.fragment.MatchItemFragment
 import com.panritech.fuad.footballmatchapp.fragment.NextMatchItemFragment
 import com.panritech.fuad.footballmatchapp.fragment.TeamItemFragment
@@ -17,7 +16,8 @@ class MainActivity : AppCompatActivity(), MatchItemFragment.OnListFragmentIntera
         , NextMatchItemFragment.OnListFragmentInteractionListener
         , TeamItemFragment.OnListFragmentInteractionListener {
     override fun onListFragmentInteraction(item: TeamItem) {
-
+        startActivity<TeamDetailActivity>("teamId" to item.teamId
+                , "teamBadge" to item.teamBadge)
     }
 
     override fun onListFragmentInteraction(item: MatchItem) {
@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity(), MatchItemFragment.OnListFragmentIntera
         openFragment(MatchItemFragment.newInstance())
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-        toFavoriteButton.setOnClickListener{v: View ->
+        toFavoriteButton.setOnClickListener{
             startActivity<FavoriteActivity>()
         }
     }

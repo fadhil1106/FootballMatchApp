@@ -39,7 +39,6 @@ class MatchItemFragment : Fragment(), MatchView {
     }
 
     override fun showMatchList(data: List<MatchItem>) {
-
         swipeRefresh.isRefreshing = false
         match.clear()
         match.addAll(data)

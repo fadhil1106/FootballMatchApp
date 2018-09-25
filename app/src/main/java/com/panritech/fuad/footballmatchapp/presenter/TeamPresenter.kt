@@ -1,6 +1,5 @@
 package com.panritech.fuad.footballmatchapp.presenter
 
-import android.util.Log
 import com.google.gson.Gson
 import com.panritech.fuad.footballmatchapp.api.ApiRepository
 import com.panritech.fuad.footballmatchapp.api.TheSportDBApi
