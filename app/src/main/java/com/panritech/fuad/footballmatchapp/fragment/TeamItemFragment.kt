@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ProgressBar
 import android.widget.Spinner
@@ -23,8 +24,7 @@ import com.panritech.fuad.footballmatchapp.model.TeamItem
 import com.panritech.fuad.footballmatchapp.presenter.TeamPresenter
 import com.panritech.fuad.footballmatchapp.view.TeamView
 import kotlinx.android.synthetic.main.fragment_teamitem.view.*
-import java.lang.reflect.Array
-import kotlin.math.log
+import org.jetbrains.anko.support.v4.onRefresh
 
 class TeamItemFragment : Fragment() , TeamView{
 
@@ -49,15 +49,16 @@ class TeamItemFragment : Fragment() , TeamView{
 
     override fun showLeagueList(data: List<LeagueItem>) {
         league.clear()
-        Log.e("Data " , data.toString())
         for (item in data){
             leagueNameList.add(item.leagueName.toString())
         }
         league.addAll(data)
         adapter.notifyDataSetChanged()
 
+        leagueName = league[0].leagueName.toString()
         val spinnerAdapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, leagueNameList)
         spinner.adapter = spinnerAdapter
+        presenter.getTeamList(leagueName)
     }
 
     override fun showTeamList(data: List<TeamItem>) {
@@ -85,6 +86,19 @@ class TeamItemFragment : Fragment() , TeamView{
         val gson = Gson()
         presenter = TeamPresenter(this,request,gson)
         presenter.getLeagueList()
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                leagueName = spinner.selectedItem.toString()
+                presenter.getTeamList(leagueName)
+            }
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
+
+        swipeRefresh.onRefresh {
+            if (leagueName.isNotEmpty())
+                presenter.getTeamList(leagueName)
+        }
 
         return view
     }
