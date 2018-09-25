@@ -10,25 +10,34 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.ProgressBar
+import android.widget.Spinner
 import com.google.gson.Gson
 import com.panritech.fuad.footballmatchapp.R
-import com.panritech.fuad.footballmatchapp.adapter.MyMatchItemRecyclerViewAdapter
+import com.panritech.fuad.footballmatchapp.adapter.MyTeamItemRecyclerViewAdapter
 import com.panritech.fuad.footballmatchapp.api.ApiRepository
-import com.panritech.fuad.footballmatchapp.model.MatchItem
-import com.panritech.fuad.footballmatchapp.presenter.MatchPresenter
-import com.panritech.fuad.footballmatchapp.view.MatchView
-import kotlinx.android.synthetic.main.fragment_matchitem.view.*
-import org.jetbrains.anko.support.v4.onRefresh
 
-class MatchItemFragment : Fragment(), MatchView {
+import com.panritech.fuad.footballmatchapp.model.LeagueItem
+import com.panritech.fuad.footballmatchapp.model.TeamItem
+import com.panritech.fuad.footballmatchapp.presenter.TeamPresenter
+import com.panritech.fuad.footballmatchapp.view.TeamView
+import kotlinx.android.synthetic.main.fragment_teamitem.view.*
+import java.lang.reflect.Array
+import kotlin.math.log
 
-    private var match: MutableList<MatchItem> = mutableListOf()
-    private var listener: OnListFragmentInteractionListener? = null
-    private lateinit var adapter: MyMatchItemRecyclerViewAdapter
-    private lateinit var presenter: MatchPresenter
-    private lateinit var swipeRefresh: SwipeRefreshLayout
+class TeamItemFragment : Fragment() , TeamView{
+
+    private var teams: MutableList<TeamItem> = mutableListOf()
+    private var league: MutableList<LeagueItem> = mutableListOf()
+    private var leagueNameList : ArrayList<String> = arrayListOf()
     private lateinit var progressBar: ProgressBar
+    private lateinit var swipeRefresh: SwipeRefreshLayout
+    private lateinit var spinner: Spinner
+    private lateinit var presenter: TeamPresenter
+    private lateinit var adapter: MyTeamItemRecyclerViewAdapter
+    private lateinit var leagueName: String
+    private var listener: OnListFragmentInteractionListener? = null
 
     override fun showProgressBar() {
         progressBar.visibility = View.VISIBLE
@@ -38,36 +47,45 @@ class MatchItemFragment : Fragment(), MatchView {
         progressBar.visibility = View.GONE
     }
 
-    override fun showMatchList(data: List<MatchItem>) {
+    override fun showLeagueList(data: List<LeagueItem>) {
+        league.clear()
+        Log.e("Data " , data.toString())
+        for (item in data){
+            leagueNameList.add(item.leagueName.toString())
+        }
+        league.addAll(data)
+        adapter.notifyDataSetChanged()
 
+        val spinnerAdapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, leagueNameList)
+        spinner.adapter = spinnerAdapter
+    }
+
+    override fun showTeamList(data: List<TeamItem>) {
         swipeRefresh.isRefreshing = false
-        match.clear()
-        match.addAll(data)
+        teams.clear()
+        teams.addAll(data)
         adapter.notifyDataSetChanged()
         hideProgressBar()
     }
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_matchitem, container, false)
+        val view = inflater.inflate(R.layout.fragment_teamitem, container, false)
 
-        val recycleView = view.findViewById<RecyclerView>(R.id.listMatch)
+        val recycleView = view.findViewById<RecyclerView>(R.id.listLeague)
         recycleView.layoutManager = LinearLayoutManager(context)
-        adapter = MyMatchItemRecyclerViewAdapter(match, listener)
+        adapter = MyTeamItemRecyclerViewAdapter(teams, listener)
         recycleView.adapter = adapter
 
         swipeRefresh = view.swipeRefresh
         progressBar = view.progressBar
 
-        swipeRefresh.onRefresh {
-            presenter.getMatchList("4328")
-        }
-        showProgressBar()
-        val apiRequest = ApiRepository()
+        spinner = view.spinner
+        val request = ApiRepository()
         val gson = Gson()
-        presenter = MatchPresenter(this, apiRequest, gson)
-        presenter.getMatchList("4328")
+        presenter = TeamPresenter(this,request,gson)
+        presenter.getLeagueList()
+
         return view
     }
 
@@ -97,13 +115,11 @@ class MatchItemFragment : Fragment(), MatchView {
      * for more information.
      */
     interface OnListFragmentInteractionListener {
-        fun onListFragmentInteraction(item: MatchItem)
+        fun onListFragmentInteraction(item: TeamItem)
     }
 
     companion object {
-
-        // TODO: Customize parameter initialization
         @JvmStatic
-        fun newInstance() = MatchItemFragment()
+        fun newInstance() = TeamItemFragment()
     }
 }

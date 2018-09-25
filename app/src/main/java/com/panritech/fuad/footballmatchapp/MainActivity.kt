@@ -5,21 +5,19 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import com.panritech.fuad.footballmatchapp.fragment.FavoritesMatchFragment
 import com.panritech.fuad.footballmatchapp.fragment.MatchItemFragment
 import com.panritech.fuad.footballmatchapp.fragment.NextMatchItemFragment
-import com.panritech.fuad.footballmatchapp.model.Favorite
+import com.panritech.fuad.footballmatchapp.fragment.TeamItemFragment
 import com.panritech.fuad.footballmatchapp.model.MatchItem
+import com.panritech.fuad.footballmatchapp.model.TeamItem
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity(), MatchItemFragment.OnListFragmentInteractionListener
         , NextMatchItemFragment.OnListFragmentInteractionListener
-        , FavoritesMatchFragment.OnListFragmentInteractionListener {
-    override fun onFavoriteListFragmentInteraction(item: Favorite) {
-        startActivity<MatchDetailActivity>("eventId" to item.eventId.toString()
-                , "homeTeam" to item.homeName
-                , "awayTeam" to item.awayName)
+        , TeamItemFragment.OnListFragmentInteractionListener {
+    override fun onListFragmentInteraction(item: TeamItem) {
+
     }
 
     override fun onListFragmentInteraction(item: MatchItem) {
@@ -43,7 +41,7 @@ class MainActivity : AppCompatActivity(), MatchItemFragment.OnListFragmentIntera
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_teams -> {
-                val fragment = FavoritesMatchFragment.newInstance()
+                val fragment = TeamItemFragment.newInstance()
                 openFragment(fragment)
                 title = "Favorites"
                 return@OnNavigationItemSelectedListener true

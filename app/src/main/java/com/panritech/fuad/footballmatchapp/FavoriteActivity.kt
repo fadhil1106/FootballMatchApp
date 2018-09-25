@@ -27,7 +27,7 @@ class FavoriteActivity : AppCompatActivity()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_teams -> {
-                title = "Favorite Team"
+                title = "Favorite TeamItem"
                 return@OnNavigationItemSelectedListener true
             }
         }
