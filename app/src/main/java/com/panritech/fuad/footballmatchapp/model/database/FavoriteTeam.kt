@@ -1,6 +1,6 @@
 package com.panritech.fuad.footballmatchapp.model.database
 
-class FavoriteTeam(val teamId: Int, val teamName: String, val teamBadge: String, val teamYear: String, val teamDescription:String) {
+data class FavoriteTeam(val teamId: Int?, val teamName: String?, val teamBadge: String?, val teamYear: String?, val teamDescription:String?) {
 
     companion object {
         const val TABLE_FAVORITES_TEAM: String = "TABLE_FAVORITES_TEAM"

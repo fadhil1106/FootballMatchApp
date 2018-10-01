@@ -6,7 +6,7 @@ import com.panritech.fuad.footballmatchapp.model.database.Favorite
 import com.panritech.fuad.footballmatchapp.model.database.FavoriteTeam
 import org.jetbrains.anko.db.*
 
-class DatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "FavoriteMatch.db", null, 1) {
+class DatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "Favorite.db", null, 1) {
 
     companion object {
         private var instance: DatabaseOpenHelper? = null
@@ -39,6 +39,7 @@ class DatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "FavoriteM
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db?.dropTable(FavoriteTeam.TABLE_FAVORITES_TEAM, true)
+        db?.dropTable(Favorite.TABLE_FAVORITES, true)
     }
 }
 

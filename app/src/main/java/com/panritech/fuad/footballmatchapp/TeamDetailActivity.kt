@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
@@ -62,7 +61,7 @@ class TeamDetailActivity : AppCompatActivity() , PlayerItemFragment.OnListFragme
         strTeamName = intent.getStringExtra("teamName")
         strTeamYear = intent.getStringExtra("teamYear")
         strTeamDescription = intent.getStringExtra("teamDescription")
-//        checkFavorite()
+        checkFavorite()
 
         team_name.text = strTeamName
         team_year.text = strTeamYear
@@ -135,19 +134,19 @@ class TeamDetailActivity : AppCompatActivity() , PlayerItemFragment.OnListFragme
         }
     }
 
-//    private fun checkFavorite() {
-//        try {
-//            database.use {
-//                val result = select(FavoriteTeam.TABLE_FAVORITES_TEAM)
-//                        .whereArgs("(TEAM_ID = {strTeamId})", "strTeamId" to strTeamId)
-//                val favorite = result.parseList(classParser<FavoriteTeam>())
-//                if (!favorite.isEmpty()) isFavorite = true
-//            }
-//        }catch (e: SQLiteConstraintException){
-//            snackbar(main_content, e.localizedMessage)
-//        }
-//
-//    }
+    private fun checkFavorite() {
+        try {
+            database.use {
+                val result = select(FavoriteTeam.TABLE_FAVORITES_TEAM)
+                        .whereArgs("(TEAM_ID = {strTeamId})", "strTeamId" to strTeamId)
+                val favorite = result.parseList(classParser<FavoriteTeam>())
+                if (!favorite.isEmpty()) isFavorite = true
+            }
+        }catch (e: SQLiteConstraintException){
+            snackbar(main_content, e.localizedMessage)
+        }
+
+    }
 
     /**
      * A [FragmentPagerAdapter] that returns a fragment corresponding to
