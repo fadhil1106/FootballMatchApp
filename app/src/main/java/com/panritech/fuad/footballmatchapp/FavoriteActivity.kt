@@ -5,13 +5,13 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
-import com.panritech.fuad.footballmatchapp.fragment.FavoritesMatchFragment
-import com.panritech.fuad.footballmatchapp.model.Favorite
+import com.panritech.fuad.footballmatchapp.fragment.match.FavoritesMatchFragment
+import com.panritech.fuad.footballmatchapp.model.database.Favorite
 import kotlinx.android.synthetic.main.activity_favorite.*
 import org.jetbrains.anko.startActivity
 
 class FavoriteActivity : AppCompatActivity()
-        ,FavoritesMatchFragment.OnListFragmentInteractionListener {
+        , FavoritesMatchFragment.OnListFragmentInteractionListener {
     override fun onFavoriteListFragmentInteraction(item: Favorite) {
         startActivity<MatchDetailActivity>("eventId" to item.eventId.toString()
                 , "homeTeam" to item.homeName

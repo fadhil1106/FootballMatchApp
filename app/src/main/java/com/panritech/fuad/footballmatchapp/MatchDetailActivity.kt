@@ -10,11 +10,11 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import com.google.gson.Gson
 import com.panritech.fuad.footballmatchapp.api.ApiRepository
-import com.panritech.fuad.footballmatchapp.model.Favorite
-import com.panritech.fuad.footballmatchapp.model.MatchDetailItem
-import com.panritech.fuad.footballmatchapp.model.TeamBadge
-import com.panritech.fuad.footballmatchapp.presenter.MatchDetailPresenter
-import com.panritech.fuad.footballmatchapp.view.MatchDetailView
+import com.panritech.fuad.footballmatchapp.model.database.Favorite
+import com.panritech.fuad.footballmatchapp.model.match.MatchDetailItem
+import com.panritech.fuad.footballmatchapp.model.team.TeamBadge
+import com.panritech.fuad.footballmatchapp.presenter.match.MatchDetailPresenter
+import com.panritech.fuad.footballmatchapp.view.match.MatchDetailView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_match_detail.*
 import org.jetbrains.anko.db.classParser

@@ -8,7 +8,7 @@
     android:background="#ffffff"
     android:orientation="vertical"
     android:padding="5dp"
-    tools:context=".fragment.MatchItemFragment">
+    tools:context=".fragment.match.MatchItemFragment">
 
     <TextView
         android:id="@+id/matchSchedule"

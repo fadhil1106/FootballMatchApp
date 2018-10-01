@@ -1,4 +1,4 @@
-package com.panritech.fuad.footballmatchapp.fragment
+package com.panritech.fuad.footballmatchapp.fragment.match
 
 import android.content.Context
 import android.os.Bundle
@@ -12,11 +12,11 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import com.google.gson.Gson
 import com.panritech.fuad.footballmatchapp.R
-import com.panritech.fuad.footballmatchapp.adapter.MyNextMatchItemRecyclerViewAdapter
+import com.panritech.fuad.footballmatchapp.adapter.match.MyNextMatchItemRecyclerViewAdapter
 import com.panritech.fuad.footballmatchapp.api.ApiRepository
-import com.panritech.fuad.footballmatchapp.model.MatchItem
-import com.panritech.fuad.footballmatchapp.presenter.MatchPresenter
-import com.panritech.fuad.footballmatchapp.view.MatchView
+import com.panritech.fuad.footballmatchapp.model.match.MatchItem
+import com.panritech.fuad.footballmatchapp.presenter.match.MatchPresenter
+import com.panritech.fuad.footballmatchapp.view.match.MatchView
 import kotlinx.android.synthetic.main.fragment_matchitem.view.*
 import org.jetbrains.anko.support.v4.onRefresh
 
@@ -40,7 +40,7 @@ class NextMatchItemFragment : Fragment(), MatchView {
     }
 
     private var match: MutableList<MatchItem> = mutableListOf()
-    private var listener: NextMatchItemFragment.OnListFragmentInteractionListener? = null
+    private var listener: OnListFragmentInteractionListener? = null
     private lateinit var adapter: MyNextMatchItemRecyclerViewAdapter
     private lateinit var presenter: MatchPresenter
     private lateinit var swipeRefresh: SwipeRefreshLayout

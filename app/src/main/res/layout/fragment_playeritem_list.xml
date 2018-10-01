@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:orientation="horizontal"
-    tools:context=".fragment.TeamItemFragment">
+    tools:context=".fragment.team.TeamItemFragment">
 
     <ImageView
         android:id="@+id/player_image"

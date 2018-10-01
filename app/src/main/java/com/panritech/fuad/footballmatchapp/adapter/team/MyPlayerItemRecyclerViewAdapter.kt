@@ -1,4 +1,4 @@
-package com.panritech.fuad.footballmatchapp.adapter
+package com.panritech.fuad.footballmatchapp.adapter.team
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.panritech.fuad.footballmatchapp.R
-import com.panritech.fuad.footballmatchapp.fragment.PlayerItemFragment.OnListFragmentInteractionListener
-import com.panritech.fuad.footballmatchapp.model.PlayersItem
+import com.panritech.fuad.footballmatchapp.fragment.team.PlayerItemFragment.OnListFragmentInteractionListener
+import com.panritech.fuad.footballmatchapp.model.team.PlayersItem
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.find
 

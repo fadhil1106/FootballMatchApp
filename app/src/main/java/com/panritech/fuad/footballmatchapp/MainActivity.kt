@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import com.panritech.fuad.footballmatchapp.fragment.MatchItemFragment
-import com.panritech.fuad.footballmatchapp.fragment.NextMatchItemFragment
-import com.panritech.fuad.footballmatchapp.fragment.TeamItemFragment
-import com.panritech.fuad.footballmatchapp.model.MatchItem
-import com.panritech.fuad.footballmatchapp.model.TeamItem
+import com.panritech.fuad.footballmatchapp.fragment.match.MatchItemFragment
+import com.panritech.fuad.footballmatchapp.fragment.match.NextMatchItemFragment
+import com.panritech.fuad.footballmatchapp.fragment.team.TeamItemFragment
+import com.panritech.fuad.footballmatchapp.model.match.MatchItem
+import com.panritech.fuad.footballmatchapp.model.team.TeamItem
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
 

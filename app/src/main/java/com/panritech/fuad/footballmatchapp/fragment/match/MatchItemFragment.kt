@@ -1,4 +1,4 @@
-package com.panritech.fuad.footballmatchapp.fragment
+package com.panritech.fuad.footballmatchapp.fragment.match
 
 import android.content.Context
 import android.os.Bundle
@@ -6,18 +6,17 @@ import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import com.google.gson.Gson
 import com.panritech.fuad.footballmatchapp.R
-import com.panritech.fuad.footballmatchapp.adapter.MyMatchItemRecyclerViewAdapter
+import com.panritech.fuad.footballmatchapp.adapter.match.MyMatchItemRecyclerViewAdapter
 import com.panritech.fuad.footballmatchapp.api.ApiRepository
-import com.panritech.fuad.footballmatchapp.model.MatchItem
-import com.panritech.fuad.footballmatchapp.presenter.MatchPresenter
-import com.panritech.fuad.footballmatchapp.view.MatchView
+import com.panritech.fuad.footballmatchapp.model.match.MatchItem
+import com.panritech.fuad.footballmatchapp.presenter.match.MatchPresenter
+import com.panritech.fuad.footballmatchapp.view.match.MatchView
 import kotlinx.android.synthetic.main.fragment_matchitem.view.*
 import org.jetbrains.anko.support.v4.onRefresh
 

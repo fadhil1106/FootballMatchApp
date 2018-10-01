@@ -1,12 +1,10 @@
-package com.panritech.fuad.footballmatchapp.presenter
+package com.panritech.fuad.footballmatchapp.presenter.team
 
 import com.google.gson.Gson
 import com.panritech.fuad.footballmatchapp.api.ApiRepository
 import com.panritech.fuad.footballmatchapp.api.TheSportDBApi
-import com.panritech.fuad.footballmatchapp.model.PlayersItemResponse
-import com.panritech.fuad.footballmatchapp.model.TeamResponse
-import com.panritech.fuad.footballmatchapp.view.PlayerView
-import com.panritech.fuad.footballmatchapp.view.TeamView
+import com.panritech.fuad.footballmatchapp.model.team.PlayersItemResponse
+import com.panritech.fuad.footballmatchapp.view.team.PlayerView
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 

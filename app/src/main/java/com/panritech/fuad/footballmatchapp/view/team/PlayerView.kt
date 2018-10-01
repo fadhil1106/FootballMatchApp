@@ -1,6 +1,6 @@
-package com.panritech.fuad.footballmatchapp.view
+package com.panritech.fuad.footballmatchapp.view.team
 
-import com.panritech.fuad.footballmatchapp.model.PlayersItem
+import com.panritech.fuad.footballmatchapp.model.team.PlayersItem
 
 interface PlayerView {
     fun showProgressBar()

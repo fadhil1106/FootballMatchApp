@@ -1,4 +1,4 @@
-package com.panritech.fuad.footballmatchapp.fragment
+package com.panritech.fuad.footballmatchapp.fragment.match
 
 import android.content.Context
 import android.os.Bundle
@@ -11,12 +11,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import com.panritech.fuad.footballmatchapp.R
-import com.panritech.fuad.footballmatchapp.adapter.MyFavoritesRecyclerViewAdapter
+import com.panritech.fuad.footballmatchapp.adapter.match.MyFavoritesRecyclerViewAdapter
 import com.panritech.fuad.footballmatchapp.database
-import com.panritech.fuad.footballmatchapp.model.Favorite
+import com.panritech.fuad.footballmatchapp.model.database.Favorite
 
-import com.panritech.fuad.footballmatchapp.model.MatchItem
-import com.panritech.fuad.footballmatchapp.view.MatchView
+import com.panritech.fuad.footballmatchapp.model.match.MatchItem
+import com.panritech.fuad.footballmatchapp.view.match.MatchView
 import kotlinx.android.synthetic.main.fragment_matchitem.view.*
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.select
@@ -25,7 +25,7 @@ import org.jetbrains.anko.support.v4.onRefresh
 class FavoritesMatchFragment : Fragment(), MatchView {
 
     private var match: MutableList<Favorite> = mutableListOf()
-    private var listener: FavoritesMatchFragment.OnListFragmentInteractionListener? = null
+    private var listener: OnListFragmentInteractionListener? = null
     private lateinit var adapter: MyFavoritesRecyclerViewAdapter
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var progressBar: ProgressBar

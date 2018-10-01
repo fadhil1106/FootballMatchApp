@@ -2,7 +2,8 @@ package com.panritech.fuad.footballmatchapp
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
-import com.panritech.fuad.footballmatchapp.model.Favorite
+import com.panritech.fuad.footballmatchapp.model.database.Favorite
+import com.panritech.fuad.footballmatchapp.model.database.FavoriteTeam
 import org.jetbrains.anko.db.*
 
 class DatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "FavoriteMatch.db", null, 1) {
@@ -19,6 +20,13 @@ class DatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "FavoriteM
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
+        db?.createTable(FavoriteTeam.TABLE_FAVORITES_TEAM, true,
+                FavoriteTeam.TEAM_ID to INTEGER + PRIMARY_KEY,
+                FavoriteTeam.TEAM_NAME to TEXT,
+                FavoriteTeam.TEAM_BADGE to TEXT,
+                FavoriteTeam.TEAM_YEAR to TEXT,
+                FavoriteTeam.TEAM_DESCRIPTION to TEXT)
+
         db?.createTable(Favorite.TABLE_FAVORITES, true,
                 Favorite.EVENT_ID to INTEGER + PRIMARY_KEY,
                 Favorite.MATCH_SCHEDULE to TEXT,
@@ -30,7 +38,7 @@ class DatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "FavoriteM
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        db?.dropTable(Favorite.TABLE_FAVORITES, true)
+        db?.dropTable(FavoriteTeam.TABLE_FAVORITES_TEAM, true)
     }
 }
 
