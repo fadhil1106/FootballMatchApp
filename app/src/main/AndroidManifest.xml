@@ -11,21 +11,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name">
+            android:name=".activity.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.WithoutActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MatchDetailActivity" />
-        <activity android:name=".FavoriteActivity" />
+        <activity android:name=".activity.MatchDetailActivity" />
+        <activity android:name=".activity.FavoriteActivity" />
         <activity
-            android:name=".TeamDetailActivity"
+            android:name=".activity.TeamDetailActivity"
             android:label="@string/title_activity_team_detail"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".PlayerDetailActivity"></activity>
+        <activity android:name=".activity.PlayerDetailActivity"/>
     </application>
 
 </manifest>

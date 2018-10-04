@@ -6,9 +6,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ProgressBar
 import com.google.gson.Gson
 import com.panritech.fuad.footballmatchapp.R
@@ -67,6 +65,11 @@ class MatchItemFragment : Fragment(), MatchView {
         presenter = MatchPresenter(this, apiRequest, gson)
         presenter.getMatchList("4328")
         return view
+    }
+
+    fun searchRequest(text: String) {
+        adapter.items = match.asSequence().filter { it.awayTeam!!.contains(text) || it.homeTeam!!.contains(text) }.toMutableList()
+        adapter.notifyDataSetChanged()
     }
 
     override fun onAttach(context: Context) {

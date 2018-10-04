@@ -15,7 +15,7 @@ import com.squareup.picasso.Picasso
 import org.jetbrains.anko.find
 
 class MyTeamItemRecyclerViewAdapter(
-        private val items: MutableList<TeamItem>,
+        var items: MutableList<TeamItem>,
         private val mListener: OnListFragmentInteractionListener?)
     : RecyclerView.Adapter<MyTeamItemRecyclerViewAdapter.ViewHolder>() {
 

@@ -69,6 +69,11 @@ class NextMatchItemFragment : Fragment(), MatchView {
         return view
     }
 
+    fun searchRequest(text: String) {
+        adapter.items = match.asSequence().filter { it.awayTeam!!.contains(text) || it.homeTeam!!.contains(text) }.toMutableList()
+        adapter.notifyDataSetChanged()
+    }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OnListFragmentInteractionListener) {

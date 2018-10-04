@@ -40,4 +40,5 @@
     <string name="team_badge">Team Badge</string>
     <string name="weight_kg">Weight (Kg)</string>
     <string name="height_m">Height (M)</string>
+    <string name="title_search">Search</string>
 </resources>
