@@ -16,6 +16,7 @@ import com.panritech.fuad.footballmatchapp.database
 import com.panritech.fuad.footballmatchapp.model.database.Favorite
 
 import com.panritech.fuad.footballmatchapp.model.match.MatchItem
+import com.panritech.fuad.footballmatchapp.model.team.LeagueItem
 import com.panritech.fuad.footballmatchapp.view.match.MatchView
 import kotlinx.android.synthetic.main.fragment_matchitem.view.*
 import org.jetbrains.anko.db.classParser
@@ -23,6 +24,7 @@ import org.jetbrains.anko.db.select
 import org.jetbrains.anko.support.v4.onRefresh
 
 class FavoritesMatchFragment : Fragment(), MatchView {
+    override fun showLeagueList(data: List<LeagueItem>) {}
 
     private var match: MutableList<Favorite> = mutableListOf()
     private var listener: OnListFragmentInteractionListener? = null

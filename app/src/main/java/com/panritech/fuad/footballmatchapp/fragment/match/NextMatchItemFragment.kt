@@ -10,17 +10,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import android.widget.Spinner
 import com.google.gson.Gson
 import com.panritech.fuad.footballmatchapp.R
 import com.panritech.fuad.footballmatchapp.adapter.match.MyNextMatchItemRecyclerViewAdapter
 import com.panritech.fuad.footballmatchapp.api.ApiRepository
 import com.panritech.fuad.footballmatchapp.model.match.MatchItem
+import com.panritech.fuad.footballmatchapp.model.team.LeagueItem
 import com.panritech.fuad.footballmatchapp.presenter.match.MatchPresenter
 import com.panritech.fuad.footballmatchapp.view.match.MatchView
 import kotlinx.android.synthetic.main.fragment_matchitem.view.*
 import org.jetbrains.anko.support.v4.onRefresh
 
 class NextMatchItemFragment : Fragment(), MatchView {
+    override fun showLeagueList(data: List<LeagueItem>) {
+
+    }
 
     override fun showProgressBar() {
         progressBar.visibility = View.VISIBLE
@@ -40,11 +45,15 @@ class NextMatchItemFragment : Fragment(), MatchView {
     }
 
     private var match: MutableList<MatchItem> = mutableListOf()
+    private var league: MutableList<LeagueItem> = mutableListOf()
+    private var leagueNameList : ArrayList<String> = arrayListOf()
     private var listener: OnListFragmentInteractionListener? = null
     private lateinit var adapter: MyNextMatchItemRecyclerViewAdapter
     private lateinit var presenter: MatchPresenter
+    private lateinit var spinner: Spinner
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var progressBar: ProgressBar
+    private lateinit var leagueName: String
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
